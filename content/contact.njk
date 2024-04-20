@@ -2,14 +2,42 @@
 layout: layouts/base.njk
 ---
 
-<form method="POST" netlify name="contact">
-<div class="mb-3">
-  <label for="email" class="form-label">Email address</label>
-  <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+<div class="container-fluid my-4 p-4 bg-body-tertiary">
+  <form method="POST" netlify name="contact" class="row needs-validation">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="firstname" class="form-label">First name</label>
+          <input type="text" class="form-control" name="firstname" id="firstname" aria-label="First name" required>
+          <div class="invalid-feedback">
+            Please enter your first name.
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="surname" class="form-label">Surname</label>
+          <input type="text" class="form-control" name="surname" id="surname" aria-label="Surname" required>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" aria-label="Email address" required>
+    </div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <textarea class="form-control" name="message" id="message" rows="3" placeholder="Please type your message here" aria-label="Message" required></textarea>
+    </div>
+    <div class="mb-3">
+      <input class="form-check-input" type="checkbox" value="" id="t&cs" required>
+      <label for="t&cs" class="form-check-label">Please tick to accept the terms and conditions</label>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-lg btn-primary" type="submit">submit</button>
+      <div class="invalid-feedback">
+        You must agree before submitting.
+      </div>
+    </div>
+  </form>
 </div>
-<div class="mb-3">
-  <label for="randomtext" class="form-label">Example textarea</label>
-  <textarea class="form-control" name="randomtext" id="randomtext" rows="3"></textarea>
-</div>
-<button class="btn btn-lg btn-primary" type="submit">submit</button>
-</form>
