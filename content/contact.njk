@@ -2,16 +2,18 @@
 layout: layouts/base.njk
 ---
 
+<div class="p-4 pb-2 text-center">
+  <h1>Contact Us</h1>
+  <p class="text-secondary">Got a question? Please fill out the form below!</p>
+</div>
+
 <div class="container-fluid my-4 p-4 bg-body-tertiary">
   <form method="POST" netlify name="contact" class="row needs-validation">
-    <div class="row">
+    <div class="row p-0 m-0">
       <div class="col">
         <div class="mb-3">
           <label for="firstname" class="form-label">First name</label>
           <input type="text" class="form-control" name="firstname" id="firstname" aria-label="First name" required>
-          <div class="invalid-feedback">
-            Please enter your first name.
-          </div>
         </div>
       </div>
       <div class="col">
@@ -35,9 +37,6 @@ layout: layouts/base.njk
     </div>
     <div class="mb-3">
       <button class="btn btn-lg btn-primary" type="submit">submit</button>
-      <div class="invalid-feedback">
-        You must agree before submitting.
-      </div>
     </div>
   </form>
 </div>
