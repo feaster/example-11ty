@@ -16,7 +16,7 @@ layout: layouts/base.njk
             <button class="btn btn-lg btn-primary" type="submit">Click me!</button>
         </div>
         <div class="row p-0 m-0 mt-2">
-            <p id="totalBill" class="fw-bold">...</p>
+            <p id="sentenceOut" class="fw-bold">...</p>
         </div>
     </form>
 </div>
@@ -29,6 +29,54 @@ layout: layouts/base.njk
     const sentenceForm = document.getElementById('sentence');
     sentenceForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        document.getElementById("totalBill").innerHTML = sentence();
+        document.getElementById("sentenceOut").innerHTML = sentence();
+    });
+</script>
+
+<div class="container-fluid my-4 p-4 bg-body-white">
+    <form name="nameCombine" id="nameCombine" class="row">
+        <div class="row p-0 m-0 mb-3">
+            <p>When a first name and surname are submitted a JavaScript function is called to combine the two.</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-5">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">First Name</span>
+                        <input type="text" class="form-control" name="fname" id="fname" aria-label="First name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Surname</span>
+                        <input type="text" class="form-control" name="lname" id="lname" aria-label="Tip percentage" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="name" class="fw-bold">Full name:</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function combineNames(firstName, surName) {
+        return `${firstName} ${surName}`;
+    };
+
+    const nameForm = document.getElementById('nameCombine');
+    nameForm.addEventListener('submit', function(event) {
+        const fname = nameForm.elements.fname.value;
+        const lname = nameForm.elements.lname.value;
+        event.preventDefault();
+        document.getElementById("name").innerHTML = `Full name: ${combineNames(fname, lname)}`;
     });
 </script>
