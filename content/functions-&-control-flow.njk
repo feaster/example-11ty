@@ -1,0 +1,140 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="p-4 pb-2 text-center">
+  <h1>Functions and Control Flow</h1>
+  <p class="text-secondary">This page uses JavaScript functions and control flow to give outputs based on your input!</p>
+</div>
+
+<div class="container-fluid my-4 p-4 bg-body-tertiary">
+    <form name="sentence" id="sentence" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Press this button to see what happens.</p>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-lg btn-primary" type="submit">Click me!</button>
+        </div>
+        <div class="row p-0 m-0 mt-2">
+            <p id="sentenceOut" class="fw-bold">...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function sentence() {
+        return "This button calls a function that outputs this sentence!";
+    };
+
+    const sentenceForm = document.getElementById('sentence');
+    sentenceForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById("sentenceOut").innerHTML = sentence();
+    });
+</script>
+
+<div class="container-fluid my-4 p-4 bg-body-white">
+    <form name="nameCombine" id="nameCombine" class="row">
+        <div class="row p-0 m-0 mb-3">
+            <p>When a first name and surname are submitted a JavaScript function is called to combine the two.</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-5">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">First Name</span>
+                        <input type="text" class="form-control" name="fname" id="fname" aria-label="First name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Surname</span>
+                        <input type="text" class="form-control" name="lname" id="lname" aria-label="Tip percentage" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="name" class="fw-bold">Full name:</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function combineNames(firstName, surName) {
+        return `${firstName} ${surName}`;
+    };
+
+    const nameForm = document.getElementById('nameCombine');
+    nameForm.addEventListener('submit', function(event) {
+        const fname = nameForm.elements.fname.value;
+        const lname = nameForm.elements.lname.value;
+        event.preventDefault();
+        document.getElementById("name").innerHTML = `Full name: ${combineNames(fname, lname)}`;
+    });
+</script>
+
+<div class="container-fluid mt-4 p-4 bg-body-tertiary">
+    <form name="coat" id="coat" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Once submitted a JavaScript function determines what you should wear using control flow (if statements).</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-5">
+                <div class="mb-3">
+                    <label for="temp" class="form-label">Temperature</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="temp" id="temp" placeholder="0" aria-label="Temperature" required>
+                        <span class="input-group-text">°F</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="mb-3">
+                    <label for="windSpeed" class="form-label">Wind speed</label>
+                    <div class="input-group">
+                        <input type="number" min="0" class="form-control" name="windSpeed" id="windSpeed" placeholder="0" aria-label="Wind speed" required>
+                        <span class="input-group-text">mph</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 align-self-end">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="clothes" class="fw-bold">You should wear ...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function coat(temp, windSpeed) {
+        if ((temp >= 50 && windSpeed <= 20) || temp >= 60) {
+            return "be fine in pants and a vest!";
+        } else if ((temp >= 30 && windSpeed <= 20) || temp >= 40) {
+            return "put on a coat!";
+        } else if ((temp >= 0 && windSpeed <= 20) || temp >= 10) {
+            return "put on a coat and a hat!";
+        } else {
+            return "stay inside!";
+        };
+    };
+
+    const coatForm = document.getElementById('coat');
+    coatForm.addEventListener('submit', function(event) {
+        const temp = coatForm.elements.temp.value;
+        const speed = coatForm.elements.windSpeed.value;
+        event.preventDefault();
+        document.getElementById("clothes").innerHTML = `You should ${coat(temp, speed)}`;
+    });
+</script>
