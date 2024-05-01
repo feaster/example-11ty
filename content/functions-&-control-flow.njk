@@ -6,3 +6,29 @@ layout: layouts/base.njk
   <h1>Functions and Control Flow</h1>
   <p class="text-secondary">This page uses JavaScript functions and control flow to give outputs based on your input!</p>
 </div>
+
+<div class="container-fluid my-4 p-4 bg-body-tertiary">
+    <form name="sentence" id="sentence" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Press this button to see what happens.</p>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-lg btn-primary" type="submit">Click me!</button>
+        </div>
+        <div class="row p-0 m-0 mt-2">
+            <p id="totalBill" class="fw-bold">...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function sentence() {
+        return "This button calls a function that outputs this sentence!";
+    };
+
+    const sentenceForm = document.getElementById('sentence');
+    sentenceForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById("totalBill").innerHTML = sentence();
+    });
+</script>
