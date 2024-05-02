@@ -3,8 +3,22 @@
 
 // Include any default variable overrides here (though functions won't be available)
 
-$primary: red;
+$primary: #808da4;
+$info: #393f5d;
+$success: #5ca569;
+$warning: #d99531;
+$danger: #f44336;
+$secondary: #957D60;
+$tertiary: #F2F4F3;
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+// Navbar
+
+$navbar-light-color: #393f5d;
+$navbar-light-hover-color: #957D60;
+$navbar-light-active-color: #393f5d;
+$navbar-light-brand-color:          $navbar-light-active-color;
+$navbar-light-brand-hover-color:    $navbar-light-active-color;
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // Then add additional custom code here
