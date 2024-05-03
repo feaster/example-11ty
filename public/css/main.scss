@@ -9,7 +9,7 @@ $success: #5ca569;
 $warning: #d99531;
 $danger: #f44336;
 $secondary: #F2F4F3;
-$tertiary: #F2F4F3;
+$tertiary: #957D60;
 
 // Navbar
 
@@ -18,6 +18,9 @@ $navbar-light-hover-color: #957D60;
 $navbar-light-active-color: #F2F4F3;
 $navbar-light-brand-color:          $navbar-light-active-color;
 $navbar-light-brand-hover-color:    $navbar-light-hover-color;
+
+// buttons
+
 
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

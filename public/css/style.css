@@ -9,3 +9,23 @@ body {
 .bg-body-inverse-tertiary {
     background-color: #393f5d;
 }
+
+.btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+}
+
+.btn-secondary {
+    color: #957D60;
+}
+
+.btn-secondary:hover {
+    color: #965749;
+}
+
+.btn-primary {
+    color: #F2F4F3;
+}
+
+.btn-primary:hover {
+    color: #965749;
+}
