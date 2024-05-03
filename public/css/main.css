@@ -3909,15 +3909,15 @@ textarea.form-control-lg {
 .navbar {
   --bs-navbar-padding-x: 0;
   --bs-navbar-padding-y: 0.5rem;
-  --bs-navbar-color: #393f5d;
+  --bs-navbar-color: #F2F4F3;
   --bs-navbar-hover-color: #957D60;
   --bs-navbar-disabled-color: rgba(var(--bs-emphasis-color-rgb), 0.3);
-  --bs-navbar-active-color: #393f5d;
+  --bs-navbar-active-color: #F2F4F3;
   --bs-navbar-brand-padding-y: 0.3125rem;
   --bs-navbar-brand-margin-end: 1rem;
   --bs-navbar-brand-font-size: 1.25rem;
-  --bs-navbar-brand-color: #393f5d;
-  --bs-navbar-brand-hover-color: #393f5d;
+  --bs-navbar-brand-color: #F2F4F3;
+  --bs-navbar-brand-hover-color: #957D60;
   --bs-navbar-nav-link-padding-x: 0.5rem;
   --bs-navbar-toggler-padding-y: 0.25rem;
   --bs-navbar-toggler-padding-x: 0.75rem;
