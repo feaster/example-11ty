@@ -13,15 +13,13 @@ $tertiary: #957D60;
 
 // Navbar
 
-$navbar-light-color: #F2F4F3;
+$navbar-light-color: $secondary;
 $navbar-light-hover-color: #957D60;
-$navbar-light-active-color: #F2F4F3;
+$navbar-light-active-color: $secondary;
 $navbar-light-brand-color:          $navbar-light-active-color;
 $navbar-light-brand-hover-color:    $navbar-light-hover-color;
-
-// buttons
-
-
+$navbar-light-icon-color:   $secondary;
+$navbar-light-toggler-border-color:     $secondary;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
