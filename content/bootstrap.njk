@@ -6,3 +6,77 @@ layout: layouts/base.njk
   <h1 class="text-info">Bootstrap Examples</h1>
   <p class="text-primary">Bootstrap is the css framework that's being used to style and layout most of this website. Below are some examples of bootstrap components that can be used when developing a website.</p>
 </div>
+
+<div class="container-fluid p-5 bg-body-inverse-tertiary text-secondary">
+    <div class="row">
+        <div class="col-4 m-0">
+            <div id="AutoPlayingCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded">
+                  <div class="carousel-item active">
+                    <img src="/img/Puffin-In-Flight.jpg" class="d-block w-100" alt="Puffin in flight">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="/img/Hedgehog.jpg" class="d-block w-100" alt="Hedgehog under bushes">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="/img/Eider-Duck.jpg" class="d-block w-100" alt="Eider duck flapping wings on the sea">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#AutoPlayingCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#AutoPlayingCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        <div class="col-4 m-0 px-5 text-center">
+            <h2>Carousels</h2>
+            <p class="pt-4">These are two examples of bootstrap carousels.</p>
+            <p class="pt-2">The carousel on the left is autoplaying so it goes through each slide automatically.</p>
+            <p class="pt-2">The carousel on the right has extra indicators which show position and are interactive. Text can also be overlayed on top of the images.</p>
+        </div>
+        <div class="col-4 m-0">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner rounded">
+                  <div class="carousel-item active">
+                    <img src="/img/Hut.jpg" class="d-block w-100" alt="Stone hut in the Yorkshire Dales, near Kettlewell">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Yorkshire Dales</h5>
+                        <p>Stone hut near Kettlewell</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="/img/Lamb.jpg" class="d-block w-100" alt="Lamb on limbstone pavement, Yorkshire Dales">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Yorkshire Dales</h5>
+                        <p>Lambs near Gordale Scar</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="/img/Malham-Sunset.jpg" class="d-block w-100" alt="Sunset at the top of Malham Cove">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Yorkshire Dales</h5>
+                        <p>Sunset on top of Malham Cove</p>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+    </div>
+</div>

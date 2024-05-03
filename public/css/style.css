@@ -29,3 +29,7 @@ body {
 .btn-primary:hover {
     color: #965749;
 }
+
+.carousel-inner {
+    text-shadow: 2px 2px 5px black;
+}
