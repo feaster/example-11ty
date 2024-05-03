@@ -10,6 +10,10 @@ body {
     background-color: #393f5d;
 }
 
+.bg-body-dark-accent {
+    background-color: #965749;
+}
+
 .btn:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
 }
