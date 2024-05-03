@@ -33,3 +33,7 @@ body {
 .carousel-inner {
     text-shadow: 2px 2px 5px black;
 }
+
+.navbar-toggler:hover {
+    background-color: #965749;
+}
