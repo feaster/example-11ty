@@ -2,12 +2,12 @@
 layout: layouts/base.njk
 ---
 
-<div class="p-4 pb-2 text-center">
+<div class="p-5 text-center bg-body-inverse-info">
   <h1 class="text-info">Tip Calculator</h1>
   <p class="text-primary">This page uses JavaScript to calculate a total bill based on the pre-tip total and tip percentage that you enter!</p>
 </div>
 
-<div class="container-fluid my-4 p-4 bg-body-tertiary">
+<div class="container-fluid p-5 bg-body-inverse-tertiary text-secondary">
     <form name="tipCalculator" id="tipCalculator" class="row">
         <div class="row p-0 m-0">
             <div class="col-5">
@@ -35,7 +35,7 @@ layout: layouts/base.njk
             </div>
         </div>
         <div class="row p-0 pt-3 m-0">
-            <p id="totalBill" class="fw-bold text-info">Your total bill, with tip, is ...</p>
+            <p id="totalBill" class="fw-bold">Your total bill, with tip, is ...</p>
         </div>
     </form>
 </div>
