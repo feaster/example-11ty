@@ -26,12 +26,16 @@ body {
     color: #965749;
 }
 
-.btn-primary {
+.btn-primary, .btn-info, .btn-success, .btn-warning, .btn-danger {
     color: #F2F4F3;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-success:hover, .btn-warning:hover, .btn-danger:hover {
     color: #965749;
+}
+
+.btn-info:hover {
+    color: #957D60;
 }
 
 .carousel-inner {
