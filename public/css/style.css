@@ -56,3 +56,14 @@ html, body {
 .navbar-toggler:hover {
     background-color: #965749;
 }
+
+.card {
+    width: 18rem;
+    height: fit-content;
+}
+
+@media only screen and (max-width: 1010px) {
+    .card {
+      width: 100%;
+    }
+}
