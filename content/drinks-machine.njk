@@ -19,9 +19,9 @@ title: Drinks Machine
     <div class="nozzle-orange"></div>
     <div class="machine"></div>
     <div class="base"></div>
-    <div class="cola-stream"></div>
-    <div class="lemon-stream"></div>
-    <div class="orange-stream"></div>
+    <div id="colaStream" class="cola-stream"></div>
+    <div id="lemonStream" class="lemon-stream"></div>
+    <div id="orangeStream" class="orange-stream"></div>
     <button id="cola" type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
     <button id="lemon" type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
     <button id="orange" type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
@@ -83,12 +83,25 @@ title: Drinks Machine
         id = setInterval(frame, 2);
         function frame() {
             if (posTop == 700) {
-            clearInterval(id);
+                clearInterval(id);
             } else {
-            posTop += 2;
-            posLeft = posLeft - 510/350;
-            elem.style.marginTop = posTop + "px";
-            elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+                posTop += 2;
+                posLeft = posLeft - 510/350;
+                elem.style.marginTop = posTop + "px";
+                elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+            }
+        }
+        let ids = null;
+        const stream = document.getElementById("colaStream");
+        let len = 100;
+        clearInterval(ids);
+        ids = setInterval(frames, 3);
+        function frames() {
+            if (len == 400) {
+                clearInterval(ids);
+            } else {
+                len += 1;
+                stream.style.height = len + "px";
             }
         }
     }
@@ -104,12 +117,12 @@ title: Drinks Machine
         id = setInterval(frame, 2);
         function frame() {
             if (posTop == 700) {
-            clearInterval(id);
+                clearInterval(id);
             } else {
-            posTop += 2;
-            posLeft = posLeft - 250/350;
-            elem.style.marginTop = posTop + "px";
-            elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+                posTop += 2;
+                posLeft = posLeft - 250/350;
+                elem.style.marginTop = posTop + "px";
+                elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
             }
         }
     }
@@ -124,10 +137,10 @@ title: Drinks Machine
         id = setInterval(frame, 2);
         function frame() {
             if (posTop == 700) {
-            clearInterval(id);
+                clearInterval(id);
             } else {
-            posTop += 2;
-            elem.style.marginTop = posTop + "px";
+                posTop += 2;
+                elem.style.marginTop = posTop + "px";
             }
         }
     }
