@@ -113,9 +113,7 @@ html, body {
 	border-right: 15px solid transparent;
 	height: 0;
 	width: 125px;
-    margin-top: 0px;
-    margin-left: calc(50% + 140px);
-    z-index: 10;
+    z-index: 15;
 }
 
 .machine {

@@ -13,15 +13,15 @@ title: Drinks Machine
 </div>
 
 <div class="container-fluid p-5 bg-body-inverse-info text-info" style="height: 1000px;">
-    <div class="cup"></div>
+    <div id="cup" class="cup" style="margin-top: 0px; margin-left: calc(50% + 140px);"></div>
     <div class="nozzle-cola"></div>
     <div class="nozzle-lemon"></div>
     <div class="nozzle-orange"></div>
     <div class="machine"></div>
     <div class="base"></div>
-    <button type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
-    <button type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
-    <button type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
+    <button id="cola" type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
+    <button id="lemon" type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
+    <button id="orange" type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
     <form id="size" class="btn-group position-absolute" role="group" style="margin-top: 225px; margin-left: calc(50% - 370px);">
         <button id="small" type="submit" class="btn btn-primary">Small</button>
         <button id="medium" type="submit" class="btn btn-primary disabled">Medium</button>
@@ -30,27 +30,103 @@ title: Drinks Machine
 </div>
 
 <script>
-    document.getElementById("small").onclick = function(event) {
+    let smallBtn = document.getElementById("small");
+    let mediumBtn = document.getElementById("medium");
+    let largeBtn = document.getElementById("large");
+
+    let colaBtn = document.getElementById("cola");
+    let lemonBtn = document.getElementById("lemon");
+    let orangeBtn = document.getElementById("orange");
+
+    smallBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Button was pressed");
-        document.getElementById("small").classList.add('disabled');
-        document.getElementById("medium").classList.remove('disabled');
-        document.getElementById("large").classList.remove('disabled');
+        console.log("Small button was pressed");
+        smallBtn.classList.add('disabled');
+        mediumBtn.classList.remove('disabled');
+        largeBtn.classList.remove('disabled');
+        console.log(hasClass(smallBtn, 'disabled'));
     };
 
-    document.getElementById("medium").onclick = function(event) {
+    mediumBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Button was pressed");
-        document.getElementById("medium").classList.add('disabled');
-        document.getElementById("small").classList.remove('disabled');
-        document.getElementById("large").classList.remove('disabled');
+        console.log("Medium button was pressed");
+        mediumBtn.classList.add('disabled');
+        smallBtn.classList.remove('disabled');
+        largeBtn.classList.remove('disabled');
+        console.log(hasClass(smallBtn, 'disabled'));
     };
 
-    document.getElementById("large").onclick = function(event) {
+    largeBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Button was pressed");
-        document.getElementById("large").classList.add('disabled');
-        document.getElementById("small").classList.remove('disabled');
-        document.getElementById("medium").classList.remove('disabled');
+        console.log("Large button was pressed");
+        largeBtn.classList.add('disabled');
+        smallBtn.classList.remove('disabled');
+        mediumBtn.classList.remove('disabled');
+        console.log(hasClass(smallBtn, 'disabled'));
     };
+
+    function hasClass(element, clsName) {
+        return(' ' + element.className + ' ').indexOf(' ' + clsName + ' ') > -1;
+    }
+
+    colaBtn.onclick = function(event) {
+        event.preventDefault();
+        let id = null;
+        const elem = document.getElementById("cup");   
+        console.log(elem.style.marginLeft);
+        let posTop = 0;
+        let posLeft = 140;
+        clearInterval(id);
+        id = setInterval(frame, 2);
+        function frame() {
+            if (posTop == 700) {
+            clearInterval(id);
+            } else {
+            posTop++;
+            posLeft = posLeft - 510/700;
+            elem.style.marginTop = posTop + "px";
+            elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+            }
+        }
+    }
+
+    lemonBtn.onclick = function(event) {
+        event.preventDefault();
+        let id = null;
+        const elem = document.getElementById("cup");   
+        console.log(elem.style.marginLeft);
+        let posTop = 0;
+        let posLeft = 140;
+        clearInterval(id);
+        id = setInterval(frame, 2);
+        function frame() {
+            if (posTop == 700) {
+            clearInterval(id);
+            } else {
+            posTop++;
+            posLeft = posLeft - 250/700;
+            elem.style.marginTop = posTop + "px";
+            elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+            }
+        }
+    }
+
+    orangeBtn.onclick = function(event) {
+        event.preventDefault();
+        let id = null;
+        const elem = document.getElementById("cup");   
+        console.log(elem.style.marginLeft);
+        let posTop = 0;
+        clearInterval(id);
+        id = setInterval(frame, 1);
+        function frame() {
+            if (posTop == 700) {
+            clearInterval(id);
+            } else {
+            posTop++;
+            elem.style.marginTop = posTop + "px";
+            }
+        }
+    }
+
 </script>
