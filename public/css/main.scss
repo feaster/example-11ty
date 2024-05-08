@@ -26,7 +26,10 @@ $navbar-light-toggler-border-color:     $secondary;
 
 $custom-theme-colors: (
     "accent": #957D60,
-    "dark-accent": #965749
+    "dark-accent": #965749,
+    "cola": rgb(52, 1, 3),
+    "orange": #FFA500,
+    "yellow": #FFFF00
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);
