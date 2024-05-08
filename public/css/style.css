@@ -113,7 +113,7 @@ html, body {
 	border-right: 15px solid transparent;
 	height: 0;
 	width: 125px;
-    z-index: 15;
+    z-index: 5;
 }
 
 .machine {
@@ -134,4 +134,37 @@ html, body {
     background-color: #957D60;
     margin-top: 450px;
     margin-left: calc(50% - 450px);
+}
+
+.cola-stream {
+    position: absolute;
+    height: 400px;
+    width: 20px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(52, 1, 3);
+    margin-top: 450px;
+    margin-left: calc(50% - 320px);
+    z-index: 6;
+}
+
+.lemon-stream {
+    position: absolute;
+    height: 150px;
+    width: 20px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #FFFF00;
+    margin-top: 450px;
+    margin-left: calc(50% - 60px);
+    z-index: 6;
+}
+
+.orange-stream {
+    position: absolute;
+    height: 100px;
+    width: 20px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #FFA500;
+    margin-top: 450px;
+    margin-left: calc(50% + 190px);
+    z-index: 6;
 }
