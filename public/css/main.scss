@@ -21,6 +21,16 @@ $navbar-light-brand-hover-color:    $navbar-light-hover-color;
 $navbar-light-icon-color:   $secondary;
 $navbar-light-toggler-border-color:     $secondary;
 
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$custom-theme-colors: (
+    "accent": #957D60,
+    "dark-accent": #965749
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 // Then add additional custom code here
