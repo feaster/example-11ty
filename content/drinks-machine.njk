@@ -22,13 +22,35 @@ title: Drinks Machine
     <button type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
     <button type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
     <button type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
-    <div class="btn-group position-absolute" role="group" style="margin-top: 225px; margin-left: calc(50% - 370px);">
-        <button type="button" class="btn btn-primary">Small</button>
-        <button type="button" class="btn btn-primary disabled">Medium</button>
-        <button type="button" class="btn btn-primary">Large</button>
-    </div>
+    <form id="size" class="btn-group position-absolute" role="group" style="margin-top: 225px; margin-left: calc(50% - 370px);">
+        <button id="small" type="submit" class="btn btn-primary">Small</button>
+        <button id="medium" type="submit" class="btn btn-primary disabled">Medium</button>
+        <button id="large" type="submit" class="btn btn-primary">Large</button>
+    </form>
 </div>
 
 <script>
-    
+    document.getElementById("small").onclick = function(event) {
+        event.preventDefault();
+        console.log("Button was pressed");
+        document.getElementById("small").classList.add('disabled');
+        document.getElementById("medium").classList.remove('disabled');
+        document.getElementById("large").classList.remove('disabled');
+    };
+
+    document.getElementById("medium").onclick = function(event) {
+        event.preventDefault();
+        console.log("Button was pressed");
+        document.getElementById("medium").classList.add('disabled');
+        document.getElementById("small").classList.remove('disabled');
+        document.getElementById("large").classList.remove('disabled');
+    };
+
+    document.getElementById("large").onclick = function(event) {
+        event.preventDefault();
+        console.log("Button was pressed");
+        document.getElementById("large").classList.add('disabled');
+        document.getElementById("small").classList.remove('disabled');
+        document.getElementById("medium").classList.remove('disabled');
+    };
 </script>
