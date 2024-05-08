@@ -82,8 +82,8 @@ title: Drinks Machine
             if (posTop == 700) {
             clearInterval(id);
             } else {
-            posTop++;
-            posLeft = posLeft - 510/700;
+            posTop += 2;
+            posLeft = posLeft - 510/350;
             elem.style.marginTop = posTop + "px";
             elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
             }
@@ -103,8 +103,8 @@ title: Drinks Machine
             if (posTop == 700) {
             clearInterval(id);
             } else {
-            posTop++;
-            posLeft = posLeft - 250/700;
+            posTop += 2;
+            posLeft = posLeft - 250/350;
             elem.style.marginTop = posTop + "px";
             elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
             }
@@ -115,15 +115,15 @@ title: Drinks Machine
         event.preventDefault();
         let id = null;
         const elem = document.getElementById("cup");   
-        console.log(elem.style.marginLeft);
+        elem.style.marginLeft = "calc(50% + 140px)";
         let posTop = 0;
         clearInterval(id);
-        id = setInterval(frame, 1);
+        id = setInterval(frame, 2);
         function frame() {
             if (posTop == 700) {
             clearInterval(id);
             } else {
-            posTop++;
+            posTop += 2;
             elem.style.marginTop = posTop + "px";
             }
         }
