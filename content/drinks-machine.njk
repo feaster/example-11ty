@@ -22,7 +22,9 @@ title: Drinks Machine
     <div id="colaStream" class="cola-stream"></div>
     <div id="colaFill" class="cola-fill"></div>
     <div id="lemonStream" class="lemon-stream"></div>
+    <div id="lemonFill" class="lemon-fill"></div>
     <div id="orangeStream" class="orange-stream"></div>
+    <div id="orangeFill" class="orange-fill"></div>
     <button id="cola" type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
     <button id="lemon" type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
     <button id="orange" type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
@@ -95,6 +97,7 @@ title: Drinks Machine
         let len = 100;
         const stream = document.getElementById("colaStream");
         const cupFill = document.getElementById("colaFill");
+        cupFill.style.borderTopWidth = 0 + "px";
         stream.style.marginTop = 450 + "px";
         setTimeout( function(){
             let ids = null;
