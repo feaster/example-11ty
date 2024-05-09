@@ -77,6 +77,8 @@ title: Drinks Machine
 
     colaBtn.onclick = function(event) {
         event.preventDefault();
+        document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
         let id = null;
         const elem = document.getElementById("cup");   
         console.log(elem.style.marginLeft);
@@ -174,6 +176,8 @@ title: Drinks Machine
 
     lemonBtn.onclick = function(event) {
         event.preventDefault();
+        document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let id = null;
         const elem = document.getElementById("cup");   
         console.log(elem.style.marginLeft);
@@ -191,10 +195,88 @@ title: Drinks Machine
                 elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
             };
         };
+        let len = 100;
+        const stream = document.getElementById("lemonStream");
+        const cupFill = document.getElementById("lemonFill");
+        cupFill.style.borderTopWidth = 0 + "px";
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 395) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let drinkSize;
+            let interval = 10;
+            console.log(hasClass(mediumBtn, 'disabled'));
+            if (hasClass(mediumBtn, "disabled") === true) {
+                drinkSize = 100;
+                interval = 12;
+                console.log("medium");
+            } else if (hasClass(smallBtn, "disabled") === true) {
+                drinkSize = 80;
+                interval = 15;
+                console.log("small");
+            } else {
+                drinkSize = 120;
+                console.log("large");
+            };
+            let fill = null;
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = -92;
+            clearInterval(fill);
+            fill = setInterval(frameFill, interval);
+            function frameFill() {
+                if (tBorder == drinkSize) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
+        }, 2800);
     };
 
     orangeBtn.onclick = function(event) {
         event.preventDefault();
+        document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let id = null;
         const elem = document.getElementById("cup");   
         elem.style.marginLeft = "calc(50% + 140px)";
@@ -209,6 +291,82 @@ title: Drinks Machine
                 elem.style.marginTop = posTop + "px";
             };
         };
+        let len = 100;
+        const stream = document.getElementById("orangeStream");
+        const cupFill = document.getElementById("orangeFill");
+        cupFill.style.borderTopWidth = 0 + "px";
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 395) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let drinkSize;
+            let interval = 10;
+            console.log(hasClass(mediumBtn, 'disabled'));
+            if (hasClass(mediumBtn, "disabled") === true) {
+                drinkSize = 100;
+                interval = 12;
+                console.log("medium");
+            } else if (hasClass(smallBtn, "disabled") === true) {
+                drinkSize = 80;
+                interval = 15;
+                console.log("small");
+            } else {
+                drinkSize = 120;
+                console.log("large");
+            };
+            let fill = null;
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = 158;
+            clearInterval(fill);
+            fill = setInterval(frameFill, interval);
+            function frameFill() {
+                if (tBorder == drinkSize) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
+        }, 2800);
     };
 
 </script>

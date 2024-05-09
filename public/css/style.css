@@ -149,9 +149,9 @@ html, body {
 
 .lemon-stream {
     position: absolute;
-    height: 150px;
+    height: 100px;
     width: 20px;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     background-color: #FFFF00;
     margin-top: 450px;
     margin-left: calc(50% - 60px);
@@ -162,7 +162,7 @@ html, body {
     position: absolute;
     height: 100px;
     width: 20px;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     background-color: #FFA500;
     margin-top: 450px;
     margin-left: calc(50% + 190px);
