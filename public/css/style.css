@@ -204,3 +204,7 @@ html, body {
     margin-left: calc(50% + 158px);
     z-index: 7;
 }
+
+.btn-orange, .btn-cola, .btn-lemon {
+    border-radius: 20px;
+}
