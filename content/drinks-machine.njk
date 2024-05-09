@@ -70,7 +70,7 @@ title: Drinks Machine
 
     function hasClass(element, clsName) {
         return(' ' + element.className + ' ').indexOf(' ' + clsName + ' ') > -1;
-    }
+    };
 
     colaBtn.onclick = function(event) {
         event.preventDefault();
@@ -80,7 +80,7 @@ title: Drinks Machine
         let posTop = 0;
         let posLeft = 140;
         clearInterval(id);
-        id = setInterval(frame, 2);
+        id = setInterval(frame, 4);
         function frame() {
             if (posTop == 700) {
                 clearInterval(id);
@@ -89,22 +89,43 @@ title: Drinks Machine
                 posLeft = posLeft - 510/350;
                 elem.style.marginTop = posTop + "px";
                 elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
-            }
-        }
-        let ids = null;
-        const stream = document.getElementById("colaStream");
+            };
+        };
         let len = 100;
-        clearInterval(ids);
-        ids = setInterval(frames, 3);
-        function frames() {
-            if (len == 400) {
-                clearInterval(ids);
-            } else {
-                len += 1;
-                stream.style.height = len + "px";
-            }
-        }
-    }
+        const stream = document.getElementById("colaStream");
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 400) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let fill = null;
+            
+        }, 2800);
+    };
 
     lemonBtn.onclick = function(event) {
         event.preventDefault();
@@ -123,9 +144,9 @@ title: Drinks Machine
                 posLeft = posLeft - 250/350;
                 elem.style.marginTop = posTop + "px";
                 elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
-            }
-        }
-    }
+            };
+        };
+    };
 
     orangeBtn.onclick = function(event) {
         event.preventDefault();
@@ -141,8 +162,8 @@ title: Drinks Machine
             } else {
                 posTop += 2;
                 elem.style.marginTop = posTop + "px";
-            }
-        }
-    }
+            };
+        };
+    };
 
 </script>
