@@ -1,0 +1,408 @@
+---
+layout: layouts/base.njk
+title: Drinks Machine
+---
+
+<div class="p-5 text-center">
+  <h1 class="text-info">Drinks Machine</h1>
+  <p class="text-primary">Using Javascript to make an interactive drinks machine.</p>
+</div>
+
+<div class="container-fluid p-5 bg-body-inverse-info text-info" style="height: 1000px;">
+    <div id="cup" class="cup" style="margin-top: 0px; margin-left: calc(50% + 140px);"></div>
+    <div id="nozzleCola" class="nozzle-cola"></div>
+    <div id="nozzleLemon" class="nozzle-lemon"></div>
+    <div id="nozzleOrange" class="nozzle-orange"></div>
+    <div class="machine"></div>
+    <div class="base"></div>
+    <div id="screen" class="screen"><p id="display" style="margin: 5px 10px; max-width: 330px;">Select size and flavour</p></div>
+    <div id="colaStream" class="cola-stream"></div>
+    <div id="colaFill" class="cola-fill"></div>
+    <div id="lemonStream" class="lemon-stream"></div>
+    <div id="lemonFill" class="lemon-fill"></div>
+    <div id="orangeStream" class="orange-stream"></div>
+    <div id="orangeFill" class="orange-fill"></div>
+    <button id="cola" type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
+    <button id="lemon" type="button" class="btn btn-lemon position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 110px);">Lemonade</button>
+    <button id="orange" type="button" class="btn btn-orange position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% + 140px);">Orangeade</button>
+    <form id="size" class="btn-group position-absolute" role="group" style="margin-top: 225px; margin-left: calc(50% - 370px);">
+        <button id="small" type="submit" class="btn btn-primary" style="border-radius: 10px 0 0 10px; height: 45px;">Small</button>
+        <button id="medium" type="submit" class="btn btn-primary disabled" style="height: 45px;">Medium</button>
+        <button id="large" type="submit" class="btn btn-primary" style="border-radius: 0 10px 10px 0; height: 45px;">Large</button>
+    </form>
+</div>
+
+<script>
+    let smallBtn = document.getElementById("small");
+    let mediumBtn = document.getElementById("medium");
+    let largeBtn = document.getElementById("large");
+
+    let colaBtn = document.getElementById("cola");
+    let lemonBtn = document.getElementById("lemon");
+    let orangeBtn = document.getElementById("orange");
+
+    smallBtn.onclick = function(event) {
+        event.preventDefault();
+        smallBtn.classList.add('disabled');
+        mediumBtn.classList.remove('disabled');
+        largeBtn.classList.remove('disabled');
+    };
+
+    mediumBtn.onclick = function(event) {
+        event.preventDefault();
+        mediumBtn.classList.add('disabled');
+        smallBtn.classList.remove('disabled');
+        largeBtn.classList.remove('disabled');
+    };
+
+    largeBtn.onclick = function(event) {
+        event.preventDefault();
+        largeBtn.classList.add('disabled');
+        smallBtn.classList.remove('disabled');
+        mediumBtn.classList.remove('disabled');
+    };
+
+    function hasClass(element, clsName) {
+        return(' ' + element.className + ' ').indexOf(' ' + clsName + ' ') > -1;
+    };
+
+    let inProgress = false;
+
+    colaBtn.onclick = function(event) {
+        event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
+        document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
+        let drinkSize;
+        let interval = 10;
+        if (hasClass(mediumBtn, "disabled") === true) {
+            drinkSize = 100;
+            interval = 12;
+        } else if (hasClass(smallBtn, "disabled") === true) {
+            drinkSize = 80;
+            interval = 15;
+        } else {
+            drinkSize = 120;
+        };
+        switch (drinkSize) {
+            case 80:
+                document.getElementById("display").innerHTML = `Small Cola selected<br>Please wait...`;
+                break;
+            case 100:
+                document.getElementById("display").innerHTML = `Medium Cola selected<br>Please wait...`;
+                break;
+            case 120:
+                document.getElementById("display").innerHTML = `Large Cola selected<br>Please wait...`;
+                break;
+        };
+        let id = null;
+        const elem = document.getElementById("cup");   
+        let posTop = 0;
+        let posLeft = 140;
+        clearInterval(id);
+        id = setInterval(frame, 4);
+        function frame() {
+            if (posTop == 700) {
+                clearInterval(id);
+            } else {
+                posTop += 2;
+                posLeft = posLeft - 510/350;
+                elem.style.marginTop = posTop + "px";
+                elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+            };
+        };
+        let len = 100;
+        const stream = document.getElementById("colaStream");
+        const cupFill = document.getElementById("colaFill");
+        cupFill.style.borderTopWidth = 0 + "px";
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            document.getElementById("nozzleCola").style.zIndex = 100;
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 395) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                    document.getElementById("nozzleCola").style.zIndex = 4;
+                    document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
+                    inProgress = false;
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let fill = null;
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = -352;
+            clearInterval(fill);
+            fill = setInterval(frameFill, interval);
+            function frameFill() {
+                if (tBorder == drinkSize) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
+        }, 2800);
+    };
+
+    lemonBtn.onclick = function(event) {
+        event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
+        document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
+        let drinkSize;
+        let interval = 10;
+        if (hasClass(mediumBtn, "disabled") === true) {
+            drinkSize = 100;
+            interval = 12;
+        } else if (hasClass(smallBtn, "disabled") === true) {
+            drinkSize = 80;
+            interval = 15;
+        } else {
+            drinkSize = 120;
+        };
+        switch (drinkSize) {
+            case 80:
+                document.getElementById("display").innerHTML = `Small Lemonade selected<br>Please wait...`;
+                break;
+            case 100:
+                document.getElementById("display").innerHTML = `Medium Lemonade selected<br>Please wait...`;
+                break;
+            case 120:
+                document.getElementById("display").innerHTML = `Large Lemonade selected<br>Please wait...`;
+                break;
+        };
+        let id = null;
+        const elem = document.getElementById("cup");   
+        let posTop = 0;
+        let posLeft = 140;
+        clearInterval(id);
+        id = setInterval(frame, 2);
+        function frame() {
+            if (posTop == 700) {
+                clearInterval(id);
+            } else {
+                posTop += 2;
+                posLeft = posLeft - 250/350;
+                elem.style.marginTop = posTop + "px";
+                elem.style.marginLeft = "calc(50% + " + posLeft + "px"; 
+            };
+        };
+        let len = 100;
+        const stream = document.getElementById("lemonStream");
+        const cupFill = document.getElementById("lemonFill");
+        cupFill.style.borderTopWidth = 0 + "px";
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            document.getElementById("nozzleLemon").style.zIndex = 100;
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 395) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                    document.getElementById("nozzleLemon").style.zIndex = 4;
+                    document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
+                    inProgress = false;
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let fill = null;
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = -92;
+            clearInterval(fill);
+            fill = setInterval(frameFill, interval);
+            function frameFill() {
+                if (tBorder == drinkSize) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
+        }, 2800);
+    };
+
+    orangeBtn.onclick = function(event) {
+        event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
+        document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
+        document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
+        let drinkSize;
+        let interval = 10;
+        if (hasClass(mediumBtn, "disabled") === true) {
+            drinkSize = 100;
+            interval = 12;
+        } else if (hasClass(smallBtn, "disabled") === true) {
+            drinkSize = 80;
+            interval = 15;
+        } else {
+            drinkSize = 120;
+        };
+        switch (drinkSize) {
+            case 80:
+                document.getElementById("display").innerHTML = `Small Orangeade selected<br>Please wait...`;
+                break;
+            case 100:
+                document.getElementById("display").innerHTML = `Medium Orangeade selected<br>Please wait...`;
+                break;
+            case 120:
+                document.getElementById("display").innerHTML = `Large Orangeade selected<br>Please wait...`;
+                break;
+        };
+        let id = null;
+        const elem = document.getElementById("cup");   
+        elem.style.marginLeft = "calc(50% + 140px)";
+        let posTop = 0;
+        clearInterval(id);
+        id = setInterval(frame, 2);
+        function frame() {
+            if (posTop == 700) {
+                clearInterval(id);
+            } else {
+                posTop += 2;
+                elem.style.marginTop = posTop + "px";
+            };
+        };
+        let len = 100;
+        const stream = document.getElementById("orangeStream");
+        const cupFill = document.getElementById("orangeFill");
+        cupFill.style.borderTopWidth = 0 + "px";
+        stream.style.marginTop = 450 + "px";
+        setTimeout( function(){
+            document.getElementById("nozzleOrange").style.zIndex = 100;
+            let ids = null;
+            clearInterval(ids);
+            ids = setInterval(frames, 4);
+            function frames() {
+                if (len == 395) {
+                    clearInterval(ids);
+                } else {
+                    len += 1;
+                    stream.style.height = len + "px";
+                };
+            };
+        }, 1400);
+        setTimeout( function(){
+            let idx = null;
+            let tMargin = 450;
+            clearInterval(idx);
+            idx = setInterval(framex, 4);
+            function framex() {
+                if (len == 0) {
+                    clearInterval(idx);
+                    document.getElementById("nozzleOrange").style.zIndex = 4;
+                    document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
+                    inProgress = false;
+                } else {
+                    len -= 1;
+                    tMargin += 1;
+                    stream.style.height = len + "px";
+                    stream.style.marginTop = tMargin + "px";
+                };
+            };
+            let fill = null;
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = 158;
+            clearInterval(fill);
+            fill = setInterval(frameFill, interval);
+            function frameFill() {
+                if (tBorder == drinkSize) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
+        }, 2800);
+    };
+
+</script>
