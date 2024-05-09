@@ -75,8 +75,14 @@ title: Drinks Machine
         return(' ' + element.className + ' ').indexOf(' ' + clsName + ' ') > -1;
     };
 
+    let inProgress = false;
+
     colaBtn.onclick = function(event) {
         event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
         document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
         document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
         let id = null;
@@ -122,6 +128,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    inProgress = false;
                 } else {
                     len -= 1;
                     tMargin += 1;
@@ -176,6 +183,10 @@ title: Drinks Machine
 
     lemonBtn.onclick = function(event) {
         event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
         document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
         document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let id = null;
@@ -221,6 +232,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    inProgress = false;
                 } else {
                     len -= 1;
                     tMargin += 1;
@@ -275,6 +287,10 @@ title: Drinks Machine
 
     orangeBtn.onclick = function(event) {
         event.preventDefault();
+        if (inProgress === true) {
+            return;
+        };
+        inProgress = true;
         document.getElementById("lemonFill").style.borderTopWidth = 0 + "px";
         document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let id = null;
@@ -317,6 +333,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    inProgress = false;
                 } else {
                     len -= 1;
                     tMargin += 1;
