@@ -127,6 +127,21 @@ title: Drinks Machine
                     stream.style.marginTop = tMargin + "px";
                 };
             };
+            let drinkSize;
+            let interval = 10;
+            console.log(hasClass(mediumBtn, 'disabled'));
+            if (hasClass(mediumBtn, "disabled") === true) {
+                drinkSize = 100;
+                interval = 12;
+                console.log("medium");
+            } else if (hasClass(smallBtn, "disabled") === true) {
+                drinkSize = 80;
+                interval = 15;
+                console.log("small");
+            } else {
+                drinkSize = 120;
+                console.log("large");
+            };
             let fill = null;
             let topMargin = 845;
             let lBorder = 0;
@@ -135,9 +150,9 @@ title: Drinks Machine
             let width = 89;
             let leftMargin = -352;
             clearInterval(fill);
-            fill = setInterval(frameFill, 10);
+            fill = setInterval(frameFill, interval);
             function frameFill() {
-                if (tBorder == 80) {
+                if (tBorder == drinkSize) {
                     clearInterval(fill);
                 } else {
                     tBorder += 1;
