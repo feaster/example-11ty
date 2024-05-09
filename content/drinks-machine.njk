@@ -20,6 +20,7 @@ title: Drinks Machine
     <div class="machine"></div>
     <div class="base"></div>
     <div id="colaStream" class="cola-stream"></div>
+    <div id="colaFill" class="cola-fill"></div>
     <div id="lemonStream" class="lemon-stream"></div>
     <div id="orangeStream" class="orange-stream"></div>
     <button id="cola" type="button" class="btn btn-cola position-absolute" style="width: 120px; margin-top: 350px; margin-left: calc(50% - 370px);">Cola</button>
@@ -93,13 +94,14 @@ title: Drinks Machine
         };
         let len = 100;
         const stream = document.getElementById("colaStream");
+        const cupFill = document.getElementById("colaFill");
         stream.style.marginTop = 450 + "px";
         setTimeout( function(){
             let ids = null;
             clearInterval(ids);
             ids = setInterval(frames, 4);
             function frames() {
-                if (len == 400) {
+                if (len == 395) {
                     clearInterval(ids);
                 } else {
                     len += 1;
@@ -123,7 +125,32 @@ title: Drinks Machine
                 };
             };
             let fill = null;
-            
+            let topMargin = 845;
+            let lBorder = 0;
+            let rBorder = 0;
+            let tBorder = 0;
+            let width = 89;
+            let leftMargin = -352;
+            clearInterval(fill);
+            fill = setInterval(frameFill, 10);
+            function frameFill() {
+                if (tBorder == 80) {
+                    clearInterval(fill);
+                } else {
+                    tBorder += 1;
+                    topMargin -= 1;
+                    lBorder += 0.1;
+                    rBorder += 0.1;
+                    width += 0.2;
+                    leftMargin -= 0.1;
+                    cupFill.style.borderTopWidth = tBorder + "px";
+                    cupFill.style.marginTop = topMargin + "px";
+                    cupFill.style.borderLeftWidth = lBorder + "px";
+                    cupFill.style.borderRightWidth = rBorder + "px";
+                    cupFill.style.width = width + "px";
+                    cupFill.style.marginLeft = "calc(50% + " + leftMargin + "px";
+                };
+            };
         }, 2800);
     };
 
