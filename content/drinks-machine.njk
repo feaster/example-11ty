@@ -5,21 +5,17 @@ title: Drinks Machine
 
 <div class="p-5 text-center">
   <h1 class="text-info">Drinks Machine</h1>
-  <p class="text-primary">; )</p>
-</div>
-
-<div class="container-fluid p-5 bg-body-inverse-tertiary text-secondary text-center">
-    <p>Text here</p>
+  <p class="text-primary">Using Javascript to make an interactive drinks machine.</p>
 </div>
 
 <div class="container-fluid p-5 bg-body-inverse-info text-info" style="height: 1000px;">
     <div id="cup" class="cup" style="margin-top: 0px; margin-left: calc(50% + 140px);"></div>
-    <div class="nozzle-cola"></div>
-    <div class="nozzle-lemon"></div>
-    <div class="nozzle-orange"></div>
+    <div id="nozzleCola" class="nozzle-cola"></div>
+    <div id="nozzleLemon" class="nozzle-lemon"></div>
+    <div id="nozzleOrange" class="nozzle-orange"></div>
     <div class="machine"></div>
     <div class="base"></div>
-    <div id="screen" class="screen"><p id="display" style="margin: 5px 10px; max-width: 300px;">Select size and flavour</p></div>
+    <div id="screen" class="screen"><p id="display" style="margin: 5px 10px; max-width: 330px;">Select size and flavour</p></div>
     <div id="colaStream" class="cola-stream"></div>
     <div id="colaFill" class="cola-fill"></div>
     <div id="lemonStream" class="lemon-stream"></div>
@@ -124,6 +120,7 @@ title: Drinks Machine
         cupFill.style.borderTopWidth = 0 + "px";
         stream.style.marginTop = 450 + "px";
         setTimeout( function(){
+            document.getElementById("nozzleCola").style.zIndex = 100;
             let ids = null;
             clearInterval(ids);
             ids = setInterval(frames, 4);
@@ -144,6 +141,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    document.getElementById("nozzleCola").style.zIndex = 4;
                     document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
                     inProgress = false;
                 } else {
@@ -235,6 +233,7 @@ title: Drinks Machine
         cupFill.style.borderTopWidth = 0 + "px";
         stream.style.marginTop = 450 + "px";
         setTimeout( function(){
+            document.getElementById("nozzleLemon").style.zIndex = 100;
             let ids = null;
             clearInterval(ids);
             ids = setInterval(frames, 4);
@@ -255,6 +254,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    document.getElementById("nozzleLemon").style.zIndex = 4;
                     document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
                     inProgress = false;
                 } else {
@@ -344,6 +344,7 @@ title: Drinks Machine
         cupFill.style.borderTopWidth = 0 + "px";
         stream.style.marginTop = 450 + "px";
         setTimeout( function(){
+            document.getElementById("nozzleOrange").style.zIndex = 100;
             let ids = null;
             clearInterval(ids);
             ids = setInterval(frames, 4);
@@ -364,6 +365,7 @@ title: Drinks Machine
             function framex() {
                 if (len == 0) {
                     clearInterval(idx);
+                    document.getElementById("nozzleOrange").style.zIndex = 4;
                     document.getElementById("display").innerHTML = `Finished!<br>Select size and flavour to start again`;
                     inProgress = false;
                 } else {
