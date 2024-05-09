@@ -47,29 +47,23 @@ title: Drinks Machine
 
     smallBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Small button was pressed");
         smallBtn.classList.add('disabled');
         mediumBtn.classList.remove('disabled');
         largeBtn.classList.remove('disabled');
-        console.log(hasClass(smallBtn, 'disabled'));
     };
 
     mediumBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Medium button was pressed");
         mediumBtn.classList.add('disabled');
         smallBtn.classList.remove('disabled');
         largeBtn.classList.remove('disabled');
-        console.log(hasClass(smallBtn, 'disabled'));
     };
 
     largeBtn.onclick = function(event) {
         event.preventDefault();
-        console.log("Large button was pressed");
         largeBtn.classList.add('disabled');
         smallBtn.classList.remove('disabled');
         mediumBtn.classList.remove('disabled');
-        console.log(hasClass(smallBtn, 'disabled'));
     };
 
     function hasClass(element, clsName) {
@@ -88,18 +82,14 @@ title: Drinks Machine
         document.getElementById("orangeFill").style.borderTopWidth = 0 + "px";
         let drinkSize;
         let interval = 10;
-        console.log(hasClass(mediumBtn, 'disabled'));
         if (hasClass(mediumBtn, "disabled") === true) {
             drinkSize = 100;
             interval = 12;
-            console.log("medium");
         } else if (hasClass(smallBtn, "disabled") === true) {
             drinkSize = 80;
             interval = 15;
-            console.log("small");
         } else {
             drinkSize = 120;
-            console.log("large");
         };
         switch (drinkSize) {
             case 80:
@@ -114,7 +104,6 @@ title: Drinks Machine
         };
         let id = null;
         const elem = document.getElementById("cup");   
-        console.log(elem.style.marginLeft);
         let posTop = 0;
         let posLeft = 140;
         clearInterval(id);
@@ -204,18 +193,14 @@ title: Drinks Machine
         document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let drinkSize;
         let interval = 10;
-        console.log(hasClass(mediumBtn, 'disabled'));
         if (hasClass(mediumBtn, "disabled") === true) {
             drinkSize = 100;
             interval = 12;
-            console.log("medium");
         } else if (hasClass(smallBtn, "disabled") === true) {
             drinkSize = 80;
             interval = 15;
-            console.log("small");
         } else {
             drinkSize = 120;
-            console.log("large");
         };
         switch (drinkSize) {
             case 80:
@@ -230,7 +215,6 @@ title: Drinks Machine
         };
         let id = null;
         const elem = document.getElementById("cup");   
-        console.log(elem.style.marginLeft);
         let posTop = 0;
         let posLeft = 140;
         clearInterval(id);
@@ -320,18 +304,14 @@ title: Drinks Machine
         document.getElementById("colaFill").style.borderTopWidth = 0 + "px";
         let drinkSize;
         let interval = 10;
-        console.log(hasClass(mediumBtn, 'disabled'));
         if (hasClass(mediumBtn, "disabled") === true) {
             drinkSize = 100;
             interval = 12;
-            console.log("medium");
         } else if (hasClass(smallBtn, "disabled") === true) {
             drinkSize = 80;
             interval = 15;
-            console.log("small");
         } else {
             drinkSize = 120;
-            console.log("large");
         };
         switch (drinkSize) {
             case 80:
