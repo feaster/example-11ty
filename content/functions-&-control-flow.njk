@@ -153,7 +153,7 @@ title: Functions & Control Flow
                 <div class="mb-3">
                     <label for="numberOne" class="form-label">Number 1</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" name="numberOne" id="numberOne" aria-label="First number" required>
+                        <input type="number" step="any" class="form-control" name="numberOne" id="numberOne" aria-label="First number" required>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@ title: Functions & Control Flow
                 <div class="mb-3">
                     <label for="numberTwo" class="form-label">Number 2</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" name="numberTwo" id="numberTwo" aria-label="Second number" required>
+                        <input type="number" step="any" class="form-control" name="numberTwo" id="numberTwo" aria-label="Second number" required>
                     </div>
                 </div>
             </div>
@@ -190,22 +190,24 @@ title: Functions & Control Flow
         let value;
         switch (operator) {
             case "+":
-            value = number1 + number2;
-            break;
+                number2 = -number2;
+                value = number1 - number2;
+                number2 = -number2;
+                break;
             case "-":
-            value = number1 - number2;
-            break;
+                value = number1 - number2;
+                break;
             case "*":
-            value = number1 * number2;
-            break;
+                value = number1 * number2;
+                break;
             case "/":
-            value = number1 / number2;
-            break;
+                value = number1 / number2;
+                break;
             case "%":
-            value = number1 % number2;
-            break;
+                value = number1 % number2;
+                break;
             default:
-            return "Unknown operator, please choose from (+, -, *, /, %)";
+                return "Unknown operator, please choose from (+, -, *, /, %)";
         };
         return `${number1} ${operator} ${number2} = ${value}`;
     };
