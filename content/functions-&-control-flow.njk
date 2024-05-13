@@ -139,3 +139,83 @@ title: Functions & Control Flow
         document.getElementById("clothes").innerHTML = `You should ${coat(temp, speed)}`;
     });
 </script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info">
+    <form name="calculator" id="calculator" class="row">
+        <div class="row p-0 m-0 mb-3">
+            <p>This form takes 2 numbers and an operator, as a string, which it passes to a function using a switch statement to determine what calculation to do. 
+                The JavaScript also ouputs an error message if an unknown operator is enetered, this is just for an example and this form would be better off using 
+                something else like a drop down list to restrict the input.
+            </p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-12 col-md-5 col-lg-4">
+                <div class="mb-3">
+                    <label for="numberOne" class="form-label">Number 1</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="numberOne" id="numberOne" aria-label="First number" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4">
+                <div class="mb-3">
+                    <label for="numberTwo" class="form-label">Number 2</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="numberTwo" id="numberTwo" aria-label="Second number" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 col-lg-2">
+                <div class="mb-3">
+                    <label for="operator" class="form-label">Operator (+, -, *, /, %)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="operator" id="operator" aria-label="Operator" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 align-self-end">
+                <div class="mb-3 text-lg-center">
+                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="calculation" class="fw-bold text-info">Number 1 (Operator) Number 2 = ...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    function calculator(number1,number2,operator) {
+        let value;
+        switch (operator) {
+            case "+":
+            value = number1 + number2;
+            break;
+            case "-":
+            value = number1 - number2;
+            break;
+            case "*":
+            value = number1 * number2;
+            break;
+            case "/":
+            value = number1 / number2;
+            break;
+            case "%":
+            value = number1 % number2;
+            break;
+            default:
+            return "Unknown operator, please choose from (+, -, *, /, %)";
+        };
+        return `${number1} ${operator} ${number2} = ${value}`;
+    };
+
+    const calcForm = document.getElementById('calculator');
+    calcForm.addEventListener('submit', function(event) {
+        const numberOne = calcForm.elements.numberOne.value;
+        const numberTwo = calcForm.elements.numberTwo.value;
+        const operator = calcForm.elements.operator.value;
+        event.preventDefault();
+        document.getElementById("calculation").innerHTML = calculator(numberOne, numberTwo, operator);
+    });
+</script>
