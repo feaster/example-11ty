@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="{{ metadata.language }}">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ title }} &middot; {{ metadata.title }}</title>
+		<meta name="description" content="{{ description or metadata.description }}">
+		<link rel="shortcut icon" href="/img/MF.ico" type="image/x-icon">
+		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<nav class="navbar navbar-expand-lg bg-body-inverse-tertiary fixed-top border-bottom border-dark-accent">
+  				<div class="container-fluid">
+    				<a class="navbar-brand" href="/index">Matthew Feaster</a>
+    				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      					<span class="navbar-toggler-icon"></span>
+    				</button>
+    				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      					<ul class="navbar-nav">
+        					<li class="nav-item">
+          						<a class="nav-link" href="/index">Home</a>
+        					</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/bootstrap">Bootstrap</a>
+						  	</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/tip-calculator">Tip Calculator</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/functions-&-control-flow">Fns & Ctrl Flow</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/drinks-machine">Drinks Machine</a>
+							</li>
+        					<li class="nav-item">
+								<a class="nav-link" href="/contact">Contact</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<main id="skip" style="margin-top: 57px;">
+            <p class="notification">Click an image to reveal the lightbox</p>
+            <h1 class="text-center mb-4">Meet Ireland through photos</h1>
+            <section class="image-grid">
+            <div class="container-xxl">
+                <div class="row gy-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland1.jpg" class="img-fluid" alt="Ring of Kerry, County Kerry, Ireland" data-caption="Ring of Kerry, County Kerry, Ireland">
+                    </a>
+                    </figure>
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland2.jpg" class="img-fluid" alt="Fintown, Ireland" data-caption="Fintown, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland3.jpg" class="img-fluid" alt="Anne Street, Dublin, Ireland" data-caption="Anne Street, Dublin, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland4.jpg" class="img-fluid" alt="Doonagore Castle, Doolin, Ireland" data-caption="Doonagore Castle, Doolin, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland5.jpg" class="img-fluid" alt="Connemara National Park, Letterfrack, Ireland" data-caption="Connemara National Park, Letterfrack, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland6.jpg" class="img-fluid" alt="Galway, Ireland" data-caption="Galway, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland7.jpg" class="img-fluid" alt="Connemara National Park, Letterfrack, Ireland" data-caption="Connemara National Park, Letterfrack, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland8.jpg" class="img-fluid" alt="The Forty Foot, Dublin 18, Ireland" data-caption="The Forty Foot, Dublin 18, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <figure>
+                    <a class="d-block" href="">
+                        <img width="1920" height="1280" src="https://assets.codepen.io/162656/ireland9.jpg" class="img-fluid" alt="Coliemore Harbour, Dublin, Ireland" data-caption="Coliemore Harbour, Dublin, Ireland">
+                    </a>
+                    </figure>
+                </div>
+                </div>
+            </div>
+            </section>
+
+            <div class="modal lightbox-modal" id="lightbox-modal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="container-fluid p-0">
+                    <!-- JS content here -->
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>          
+		</main>
+
+        <style>
+            /* BASIC STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --yellow: #fffbbc;
+  --lightbox: #242424;
+}
+
+body {
+  margin: 24px 0 48px;
+  font: 20px / 28px "Marck Script", cursive;
+}
+
+.notification {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px 15px;
+  margin: 0;
+  text-align: center;
+  z-index: 1;
+  background: var(--yellow);
+}
+
+@media (max-width: 700px) {
+  .notification {
+    display: none;
+  }
+}
+
+
+/* IMAGE GRID STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.image-grid figure {
+  margin-bottom: 0;
+}
+
+.image-grid img {
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s;
+}
+
+.image-grid a:hover img {
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.35);
+}
+
+
+/* LIGHTBOX STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.lightbox-modal .modal-content {
+  background: var(--lightbox);
+}
+
+.lightbox-modal .btn-close {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+
+.lightbox-modal .modal-body {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+}
+
+.lightbox-modal img {
+  width: auto;
+  max-height: 100vh;
+  max-width: 100%;
+}
+
+.lightbox-modal .carousel-caption {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(36, 36, 36, 0.75);
+}
+
+.lightbox-modal .carousel-control-prev,
+.lightbox-modal .carousel-control-next {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  width: auto;
+}
+
+.lightbox-modal .carousel-control-prev {
+  left: 10px;
+}
+
+.lightbox-modal .carousel-control-next {
+  right: 10px;
+}
+        </style>
+
+		<footer class="footer mt-auto py-3 bg-primary">
+			<div class="container text-center text-secondary">
+				<p class="m-0 p-0">&copy Matthew Feaster</p>
+			</div>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script src="/js/main.js"></script>
+        <script>
+            const imageGrid = document.querySelector(".image-grid");
+const links = imageGrid.querySelectorAll("a");
+const imgs = imageGrid.querySelectorAll("img");
+const lightboxModal = document.getElementById("lightbox-modal");
+const bsModal = new bootstrap.Modal(lightboxModal);
+const modalBody = document.querySelector(".modal-body .container-fluid");
+
+for (const link of links) {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const currentImg = link.querySelector("img");
+    const lightboxCarousel = document.getElementById("lightboxCarousel");
+    if (lightboxCarousel) {
+      const parentCol = link.parentElement.parentElement;
+      const index = [...parentCol.parentElement.children].indexOf(parentCol);
+      const bsCarousel = new bootstrap.Carousel(lightboxCarousel);
+      bsCarousel.to(index);
+    } else {
+      createCarousel(currentImg);
+    }
+    bsModal.show();
+  });
+}
+
+function createCarousel(img) {
+  const markup = `
+    <div id="lightboxCarousel" class="carousel slide carousel-fade">
+      <div class="carousel-inner">
+        ${createSlides(img)}
+      </div> 
+      <button class="carousel-control-prev" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="prev">
+       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+       <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    `;
+
+  modalBody.innerHTML = markup;
+}
+
+function createSlides(img) {
+  let markup = "";
+  const currentImgSrc = img.getAttribute("src");
+
+  for (const img of imgs) {
+    const imgSrc = img.getAttribute("src");
+    const imgAlt = img.getAttribute("alt");
+    const imgCaption = img.getAttribute("data-caption");
+
+    markup += `
+    <div class="carousel-item${currentImgSrc === imgSrc ? " active" : ""}">
+      <img src=${imgSrc} alt=${imgAlt}>
+      ${imgCaption ? createCaption(imgCaption) : ""}
+    </div>
+    `;
+  }
+
+  return markup;
+}
+
+function createCaption(caption) {
+  return `<div class="carousel-caption">
+     <p class="m-0">${caption}</p>
+    </div>`;
+}
+        </script>
+	</body>
+</html>
