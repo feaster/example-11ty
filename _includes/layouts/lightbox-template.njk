@@ -1,0 +1,267 @@
+---
+layout: layouts/base.njk
+---
+
+{{content | safe}}
+
+          <section class="image-grid">
+            <div class="container-fluid mx-0 px-4 pb-4">
+              <div class="row">
+                <div class="col-12 col-md-4">
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name1}}" src="{{img1}}" class="img-fluid mb-4" alt="{{alt1}}" data-caption="{{alt1}}">
+                      </a>
+                    </figure>
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name2}}" src="{{img2}}" class="img-fluid mb-4" alt="{{alt2}}" data-caption="{{alt2}}">
+                      </a>
+                    </figure>
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name3}}" src="{{img3}}" class="img-fluid mb-4" alt="{{alt3}}" data-caption="{{alt3}}">
+                      </a>
+                    </figure>
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name10}}" src="{{img10}}" class="img-fluid mb-4" alt="{{alt10}}" data-caption="{{alt10}}">
+                      </a>
+                    </figure>
+
+                </div>
+                <div class="col-12 col-md-4">
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name4}}" src="{{img4}}" class="img-fluid mb-4" alt="{{alt4}}" data-caption="{{alt4}}">
+                      </a>
+                    </figure>
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name5}}" src="{{img5}}" class="img-fluid mb-4" alt="{{alt5}}" data-caption="{{alt5}}">
+                      </a>
+                    </figure>
+
+                    <figure>
+                      <a class="d-block" href="">
+                        <img name="{{name6}}" src="{{img6}}" class="img-fluid mb-4" alt="{{alt6}}" data-caption="{{alt6}}">
+                      </a>
+                    </figure>
+
+                </div>
+                <div class="col-12 col-md-4">
+                  <figure>
+                    <a class="d-block" href="">
+                      <img name="{{name7}}" src="{{img7}}" class="img-fluid mb-4" alt="{{alt7}}" data-caption="{{alt7}}">
+                    </a>
+                  </figure>
+                  <figure>
+                    <a class="d-block" href="">
+                      <img name="{{name8}}" src="{{img8}}" class="img-fluid mb-4" alt="{{alt8}}" data-caption="{{alt8}}">
+                    </a>
+                  </figure>
+                  <figure>
+                    <a class="d-block" href="">
+                      <img name="{{name9}}" src="{{img9}}" class="img-fluid mb-4" alt="{{alt9}}" data-caption="{{alt9}}">
+                    </a>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="modal lightbox-modal" id="lightbox-modal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                  <div class="container-fluid p-0">
+                    <!-- JS content here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+
+<style>
+            /* BASIC STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+  --yellow: #fffbbc;
+  --lightbox: #242424;
+}
+
+/* IMAGE GRID STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.image-grid figure {
+  margin-bottom: 0;
+}
+
+/* LIGHTBOX STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.lightbox-modal .modal-content {
+  background: var(--lightbox);
+}
+
+.lightbox-modal .btn-close {
+  position: absolute;
+  top: 20px;
+  right: 18px;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+
+.lightbox-modal .modal-body {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+}
+
+.lightbox-modal img {
+  width: auto;
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+.lightbox-modal {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(36, 36, 36, 0.75);
+}
+
+.lightbox-modal .carousel-control-prev,
+.lightbox-modal .carousel-control-next {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  width: auto;
+}
+
+.lightbox-modal .carousel-control-prev {
+  left: 10px;
+}
+
+.lightbox-modal .carousel-control-next {
+  right: 10px;
+}
+
+/* Carousel caption */
+
+.carousel-caption {
+  top: 100%;
+  text-shadow: none;
+}
+
+.carousel-inner {
+  overflow: visible;
+}
+
+.carousel {
+  overflow: hidden;
+  padding-bottom: 5vh;
+}
+
+</style>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script src="/js/main.js"></script>
+    <script>
+    const imageGrid = document.querySelector(".image-grid");
+    const links = imageGrid.querySelectorAll("a");
+    let imgs = imageGrid.querySelectorAll("img");
+    const lightboxModal = document.getElementById("lightbox-modal");
+    const bsModal = new bootstrap.Modal(lightboxModal);
+    const modalBody = document.querySelector(".modal-body .container-fluid");
+    
+    for (const img of imgs) {
+      if (!img.getAttribute("src")) {
+        img.parentElement.parentElement.remove();
+      };
+    };
+
+    imgs = imageGrid.querySelectorAll("img");
+
+    for (const link of links) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const currentImg = link.querySelector("img");
+        const lightboxCarousel = document.getElementById("lightboxCarousel");
+        if (lightboxCarousel) {
+          const parentCol = link.parentElement.parentElement;
+          const indexCol = [...parentCol.parentElement.children].indexOf(parentCol);
+          const parentFig = link.parentElement;
+          const indexFig = [...parentFig.parentElement.children].indexOf(parentFig);
+          let index = 0;
+          for (let i=0; i<indexCol; i++) {
+            index += parentCol.parentElement.children[i].children.length;
+          }
+          for (let i=0; i<indexFig; i++) {
+            index += parentFig.parentElement.children[i].children.length;
+          }
+          const bsCarousel = new bootstrap.Carousel(lightboxCarousel);
+          bsCarousel.to(index);
+        } else {
+          createCarousel(currentImg);
+        }
+        bsModal.show();
+      });
+    }
+
+    function createCarousel(img) {
+      const markup = `
+        <div id="lightboxCarousel" class="carousel slide carousel-fade">
+          <div class="carousel-inner">
+            ${createSlides(img)}
+          </div> 
+          <button class="carousel-control-prev" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#lightboxCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        `;
+
+      modalBody.innerHTML = markup;
+    }
+
+    function createSlides(img) {
+      let markup = "";
+      const currentImgSrc = img.getAttribute("src");
+
+      for (const img of imgs) {
+        const imgSrc = img.getAttribute("src");
+        const imgAlt = img.getAttribute("alt");
+        const imgCaption = img.getAttribute("data-caption");
+        const imgName = img.getAttribute("name");
+
+        if (imgSrc) {
+          markup += `
+          <div class="carousel-item${currentImgSrc === imgSrc ? " active" : ""}">
+            <img src=${imgSrc} alt=${imgAlt}>
+            ${imgCaption ? createCaption(imgCaption) : ""}
+          </div>
+          `;
+        };
+      }
+
+      return markup;
+    }
+
+    function createCaption(caption) {
+      return `<div class="carousel-caption">
+        <p class="m-0">${caption}</p>
+        </div>`;
+    }
+
+    </script>
