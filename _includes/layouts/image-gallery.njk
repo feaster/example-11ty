@@ -1,51 +1,7 @@
-<!doctype html>
-<html lang="{{ metadata.language }}">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>{{ title }} &middot; {{ metadata.title }}</title>
-		<meta name="description" content="{{ description or metadata.description }}">
-		<link rel="shortcut icon" href="/img/MF.ico" type="image/x-icon">
-		<link rel="stylesheet" href="/css/main.css">
-		<link rel="stylesheet" href="/css/style.css">
-	</head>
-	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
+---
+layout: layouts/base.njk
+---
 
-		<header>
-			<nav class="navbar navbar-expand-lg bg-body-inverse-tertiary fixed-top border-bottom border-dark-accent">
-  				<div class="container-fluid">
-    				<a class="navbar-brand" href="/index">Matthew Feaster</a>
-    				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      					<span class="navbar-toggler-icon"></span>
-    				</button>
-    				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      					<ul class="navbar-nav">
-        					<li class="nav-item">
-          						<a class="nav-link" href="/index">Home</a>
-        					</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/bootstrap">Bootstrap</a>
-						  	</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/tip-calculator">Tip Calculator</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/functions-&-control-flow">Fns & Ctrl Flow</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/drinks-machine">Drinks Machine</a>
-							</li>
-        					<li class="nav-item">
-								<a class="nav-link" href="/contact">Contact</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
-
-		<main id="skip" style="margin-top: 57px;">
           <section class="image-grid">
             <div class="container-fluid mx-0 p-4">
               <div class="row">
@@ -130,7 +86,6 @@
               </div>
             </div>
           </div>          
-		</main>
 
         <style>
             /* BASIC STYLES
@@ -314,5 +269,3 @@
     }
 
     </script>
-	</body>
-</html>
