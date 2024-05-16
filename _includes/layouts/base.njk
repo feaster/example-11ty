@@ -58,7 +58,19 @@
 			</div>
 		</footer>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+		<script>
+			let scripts = Array
+				.from(document.querySelectorAll('script'))
+				.map(scr => scr.src);
+
+			if (!scripts.includes('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')) {
+				var tag = document.createElement('script');
+    			tag.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js';
+				tag.integrity = 'sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz';
+				tag.crossOrigin = 'anonymous';
+    			document.getElementsByTagName('body')[0].appendChild(tag);
+			}
+		</script>
 		<script src="/js/main.js"></script>
 	</body>
 </html>
