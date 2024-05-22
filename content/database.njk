@@ -5,8 +5,11 @@ title: Database
 
 <h1>MongoDB with Netlify functions</h1>
 <ul id="movies"></ul>
+<button data-add-book class="btn btn-primary">Add book</button>
 
 <script>
+    const addBookButton = document.querySelector("[data-add-book]");
+
     (async () => {
         try {
             let results = await fetch("/.netlify/functions/get_movies").then(response => response.json());
@@ -19,4 +22,18 @@ title: Database
             console.error(error);
         }
     })();
+
+    const myObj = {
+        title: "Death on the Nile",
+        author: "Agatha Christie",
+        read: true
+    }
+
+    async function addBookToDB() {
+        console.log("hello");
+        const result = await fetch("/.netlify/functions/add_books?title=Death+on+the+Nile&author=Agatha+Christie&read=true");
+        console.log(result);
+    }
+
+    addBookButton.addEventListener("click", addBookToDB);
 </script>
