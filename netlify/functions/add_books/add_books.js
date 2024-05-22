@@ -4,7 +4,6 @@ require('dotenv').config();
 exports.handler = async function (event, context) {
     try {
         const { title, author, read } = event.queryStringParameters;
-        console.log(event.queryStringParameters);
         const dataToSend = {
             title,
             author,
