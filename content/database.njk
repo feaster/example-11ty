@@ -3,14 +3,85 @@ layout: layouts/base.njk
 title: Database
 ---
 
-<h1>MongoDB with Netlify functions</h1>
-<ul id="books"></ul>
-<button data-add-book class="btn btn-primary">Add book</button>
+<div class="p-5 text-center">
+    <h1 class="text-info">Database with Netlify Functions</h1>
+    <p class="text-primary"></p>
+</div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <form name="addBook" id="addBook" class="row">
+        <div class="row p-0 m-0 mb-3">
+            <p>Enter a new book here:</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Title</span>
+                        <input type="text" class="form-control" name="title" id="title" aria-label="Book title" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Author</span>
+                        <input type="text" class="form-control" name="author" id="author" aria-label="Book author" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Your name</span>
+                        <input type="text" class="form-control" name="readerName" id="readerName" placeholder="Anonymous" aria-label="Your name/nickname" aria-placeholder="Anonymous">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="readOptions" id="yes" value="true" checked>
+                        <label class="form-check-label" for="yes">Book <strong>has</strong> been read</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="readOptions" id="no" value="flase">
+                        <label class="form-check-label" for="no">Book <strong>hasn't</strong> been read</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-secondary" type="submit" data-add-book>submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info text-info">
+    <form name="booksList" id="booksList" class="row">
+        <div class="row p-0 m-0">
+            <div class="col">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-primary" type="submit" data-get-books>Get list of books</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <ul id="books"></ul>
+        </div>
+    </form>
+</div>
+
+
 
 <script>
     const addBookButton = document.querySelector("[data-add-book]");
+    const getBooksButton = document.querySelector("[data-get-books]");
 
-    (async () => {
+    async function getBookList(event) {
+        event.preventDefault();
         try {
             let results = await fetch("/.netlify/functions/get_books").then(response => response.json());
             results.forEach(result => {
@@ -20,23 +91,32 @@ title: Database
             });
         } catch (error) {
             console.error(error);
-        }
-    })();
-
-    const myObj = {
-        title: "Death on the Nile",
-        author: "Agatha Christie",
-        read: true
-    }
+        };
+    };
 
     function buildQuery (data) {
         return new URLSearchParams(data).toString();
     }
 
-    async function addBookToDB() {
+    async function addBookToDB(event) {
+        event.preventDefault();
+        const addBookForm = document.getElementById("addBook");
+        const title = addBookForm.elements.title.value;
+        const author = addBookForm.elements.author.value;
+        let name = addBookForm.elements.readerName.value;
+        if (!name) { name = "Anonymous" };
+        const read = addBookForm.elements.readOptions.value;
+        const myObj = {
+            title,
+            author,
+            name,
+            read
+        };
         queryString = "/.netlify/functions/add_books?" + buildQuery(myObj);
         const result = await fetch(queryString);
+        addBookForm.reset();
     }
 
     addBookButton.addEventListener("click", addBookToDB);
+    getBooksButton.addEventListener("click", getBookList);
 </script>

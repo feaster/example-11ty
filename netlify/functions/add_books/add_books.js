@@ -3,13 +3,13 @@ require('dotenv').config();
 
 exports.handler = async function (event, context) {
     try {
-        const { title, author, read } = event.queryStringParameters;
+        const { title, author, name, read } = event.queryStringParameters;
         const dataToSend = {
             title,
             author,
+            name,
             read,
         };
-
         const sendToDatabase = await axios({
             "method": "POST",
             "url": `${process.env.MONGODB_DATA_API_URL}/action/insertOne`,
