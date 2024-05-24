@@ -11,7 +11,7 @@ const handler = async (event) => {
     const collection = database.collection(process.env.MONGODB_COLLECTION);
     let maxNumber = event.queryStringParameters.limit;
     maxNumber = Number(maxNumber);
-    const results = await collection.find({}).limit(maxNumber).toArray();
+    const results = await collection.find({}).sort({ $natural: -1 }).limit(maxNumber).toArray();
     return {
       statusCode: 200,
       body: JSON.stringify(results)
