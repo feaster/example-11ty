@@ -9,7 +9,9 @@ const handler = async (event) => {
   try {
     const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
     const collection = database.collection(process.env.MONGODB_COLLECTION);
-    const results = await collection.find({}).limit(10).toArray();
+    let maxNumber = event.queryStringParameters.limit;
+    maxNumber = Number(maxNumber);
+    const results = await collection.find({}).limit(maxNumber).toArray();
     return {
       statusCode: 200,
       body: JSON.stringify(results)

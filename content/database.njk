@@ -62,9 +62,19 @@ title: Database
 <div class="container-fluid m-0 p-5 bg-body-inverse-info text-info">
     <form name="booksList" id="booksList" class="row">
         <div class="row p-0 m-0">
-            <div class="col">
+            <div class="col-12">
                 <div class="mb-3 text-center">
                     <button class="btn btn-lg btn-primary" type="submit" data-get-books>Get list of books</button>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <div class="d-flex flex-row mb-3 text-center">
+                    <span class="align-self-center me-2" style="margin-left: auto;">Max list entries: </span>
+                    <select class="form-select form-select-sm" name="limit" aria-label="Number of books in list select" style="width: 100px; margin-right: auto;">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -83,11 +93,20 @@ title: Database
     async function getBookList(event) {
         event.preventDefault();
         try {
-            let results = await fetch("/.netlify/functions/get_books").then(response => response.json());
+            const booksListForm = document.getElementById("booksList");
+            const limit = booksListForm.elements.limit.value;
+            const myObj = {
+                limit
+            };
+            let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
+            const list = document.getElementById("books");
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            };
             results.forEach(result => {
                 const listItem = document.createElement("li");
                 listItem.innerText = result.title;
-                document.getElementById("books").appendChild(listItem);
+                list.appendChild(listItem);
             });
         } catch (error) {
             console.error(error);
@@ -112,7 +131,7 @@ title: Database
             name,
             read
         };
-        queryString = "/.netlify/functions/add_books?" + buildQuery(myObj);
+        const queryString = "/.netlify/functions/add_books?" + buildQuery(myObj);
         const result = await fetch(queryString);
         addBookForm.reset();
     }
