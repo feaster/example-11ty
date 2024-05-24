@@ -71,6 +71,8 @@ title: Database
                 <div class="d-flex flex-row mb-3 text-center">
                     <span class="align-self-center me-2" style="margin-left: auto;">Max list entries: </span>
                     <select class="form-select form-select-sm" name="limit" aria-label="Number of books in list select" style="width: 100px; margin-right: auto;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -79,7 +81,16 @@ title: Database
             </div>
         </div>
         <div class="row p-0 pt-3 m-0">
-            <ul id="books"></ul>
+            <table id="booksTable" class="table">
+                <thead>
+                    <tr>
+                        <th class="text-primary" scope="col">Title</th>
+                        <th class="text-primary" scope="col">Author</th>
+                        <th class="text-primary" scope="col">Name</th>
+                        <th class="text-primary" scope="col">Read</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </form>
 </div>
@@ -99,14 +110,28 @@ title: Database
                 limit
             };
             let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
-            const list = document.getElementById("books");
-            while (list.hasChildNodes()) {
-                list.removeChild(list.firstChild);
+            const booksTable = document.getElementById("booksTable");
+            while (booksTable.childNodes.length > 2) {
+                booksTable.removeChild(booksTable.lastChild);
             };
+            if (document.getElementById("booksTableBody")) {
+                document.getElementById("booksTableBody").remove();
+            };
+            document.getElementById("booksTable").appendChild(document.createElement("tbody"));
+            document.querySelector("tbody").setAttribute("id", "booksTableBody");
+            const booksTableBody = document.getElementById("booksTableBody");
             results.forEach(result => {
-                const listItem = document.createElement("li");
-                listItem.innerText = result.title;
-                list.appendChild(listItem);
+                const row = document.createElement("tr");
+                const res = { title: result.title, author: result.author, name: result.name, read: result.read };
+                for (let key in res) {
+                    const td = document.createElement("td");
+                    td.innerText = res[key];
+                    row.appendChild(td);
+                }
+                for (i=0; i<row.children.length; i++) {
+                    row.children[i].classList.add('text-info');
+                }
+                booksTableBody.appendChild(row);
             });
         } catch (error) {
             console.error(error);
