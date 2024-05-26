@@ -122,14 +122,32 @@ title: Database
             const booksTableBody = document.getElementById("booksTableBody");
             results.forEach(result => {
                 const row = document.createElement("tr");
+                if (result.read == "true") {
+                    result.read = "bi-check";
+                } else {
+                    result.read = "bi-x";
+                }
                 const res = { title: result.title, author: result.author, name: result.name, read: result.read };
                 for (let key in res) {
                     const td = document.createElement("td");
-                    td.innerText = res[key];
+                    if (key !== "read") {
+                        td.innerText = res[key];
+                    } else {
+                        const icon = document.createElement("i");
+                        icon.classList.add("bi");
+                        icon.classList.add(res.read);
+                        td.appendChild(icon);
+                    }
                     row.appendChild(td);
                 }
                 for (i=0; i<row.children.length; i++) {
-                    row.children[i].classList.add('text-info');
+                    if (i < row.children.length - 1) {
+                        row.children[i].classList.add('text-info');
+                    } else if (result.read === "bi-check") {
+                        row.children[i].classList.add('text-success');
+                    } else {
+                        row.children[i].classList.add('text-danger');
+                    }
                 }
                 booksTableBody.appendChild(row);
             });
