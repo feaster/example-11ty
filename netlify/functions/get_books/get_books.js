@@ -9,31 +9,37 @@ const handler = async (event) => {
   try {
     const database = (await clientPromise).db(process.env.MONGODB_DATABASE);
     const collection = database.collection(process.env.MONGODB_COLLECTION);
+    
     let maxNumber = event.queryStringParameters.limit;
     maxNumber = Number(maxNumber);
     const search = event.queryStringParameters.search;
     const searchType = event.queryStringParameters.searchType;
-    console.log(searchType);
-    const filter = {};
-    if (search.length > 0) {
-      switch (searchType) {
-        case "title":
-          filter.title = search;
-          break;
-        case "author":
-          filter.author = search;
-          break;
-        case "name":
-          filter.name = search;
-          break;
-      }
-      console.log(filter);
+
+    if (search.length === 0) {
+      const results = await collection.find({}).sort({ $natural: -1 }).limit(maxNumber).toArray();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(results)
+      };
+    } else if (searchType === "author") {
+      const results = await collection.find({ author: { $regex: `${search}`, $options: 'i' } }).sort({ $natural: -1 }).limit(maxNumber).toArray();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(results)
+      };
+    } else if (searchType === "title") {
+      const results = await collection.find({ title: { $regex: `${search}`, $options: 'i' } }).sort({ $natural: -1 }).limit(maxNumber).toArray();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(results)
+      };
+    } else if (searchType === "name") {
+      const results = await collection.find({ name: { $regex: `${search}`, $options: 'i' } }).sort({ $natural: -1 }).limit(maxNumber).toArray();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(results)
+      };
     }
-    const results = await collection.find(filter).collation({locale: "en", strength: 1}).sort({ $natural: -1 }).limit(maxNumber).toArray();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(results)
-    };
   } catch (error) {
     return { statusCode: 500, body: error.toString() };
   }
