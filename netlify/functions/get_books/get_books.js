@@ -11,7 +11,25 @@ const handler = async (event) => {
     const collection = database.collection(process.env.MONGODB_COLLECTION);
     let maxNumber = event.queryStringParameters.limit;
     maxNumber = Number(maxNumber);
-    const results = await collection.find({}).sort({ $natural: -1 }).limit(maxNumber).toArray();
+    const search = event.queryStringParameters.search;
+    const searchType = event.queryStringParameters.searchType;
+    console.log(searchType);
+    const filter = {};
+    if (search.length > 0) {
+      switch (searchType) {
+        case "title":
+          filter.title = search;
+          break;
+        case "author":
+          filter.author = search;
+          break;
+        case "name":
+          filter.name = search;
+          break;
+      }
+      console.log(filter);
+    }
+    const results = await collection.find(filter).collation({locale: "en", strength: 1}).sort({ $natural: -1 }).limit(maxNumber).toArray();
     return {
       statusCode: 200,
       body: JSON.stringify(results)

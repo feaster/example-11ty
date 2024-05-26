@@ -79,6 +79,19 @@ title: Database
                     </select>
                 </div>
             </div>
+            <div class="col-12 text-center">
+                <div class="d-flex flex-row  mb-3">
+                    <span class="align-self-center me-2" style="margin-left: auto;">Search: </span>
+                    <div class="d-flex flex-row text-center input-group input-group-sm" style="width: 325px; margin-right: auto;">
+                        <input type="text" class="form-control form-control" name="search" id="search" aria-label="Search text" style="width: 225px;">
+                        <select class="form-select form-select" name="searchType" aria-label="Search for results in this category" style="width: 100px;">
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="row p-0 pt-3 m-0">
             <table id="booksTable" class="table">
@@ -106,8 +119,12 @@ title: Database
         try {
             const booksListForm = document.getElementById("booksList");
             const limit = booksListForm.elements.limit.value;
+            const search = booksListForm.elements.search.value;
+            const searchType = booksListForm.elements.searchType.value;
             const myObj = {
-                limit
+                limit,
+                search,
+                searchType
             };
             let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
             const booksTable = document.getElementById("booksTable");
