@@ -150,14 +150,11 @@ title: Database
     }
 
     function order (orderBtn, col) {
-        console.log(booksListOriginal);
         orderBtn.value = btnOrderChange(orderBtn.value);
-        console.log(orderBtn.value);
         if (orderBtn.value === "ascending") {
             orderBtn.children[0].classList.remove("bi-dash-lg");
             orderBtn.children[0].classList.add("bi-caret-down-fill");
             booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
-            console.log(orderBtn);
             booksListOrdered.sort((a,b) => {
                 let fa = a[col].toLowerCase(),
                     fb = b[col].toLowerCase();
