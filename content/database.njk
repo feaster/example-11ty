@@ -93,19 +93,19 @@ title: Database
                 </div>
             </div>
         </div>
-        <div class="row p-0 pt-3 m-0">
-            <table id="booksTable" class="table">
-                <thead>
-                    <tr>
-                        <th class="text-primary" scope="col">Title</th>
-                        <th class="text-primary" scope="col">Author</th>
-                        <th class="text-primary" scope="col">Name</th>
-                        <th class="text-primary" scope="col">Read</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
     </form>
+    <div class="row p-0 pt-3 m-0">
+        <table id="booksTable" class="table">
+            <thead>
+                <tr>
+                    <th class="text-primary" scope="col">Title<button id="orderTitleButton" class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-title><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Author</th>
+                    <th class="text-primary" scope="col">Name</th>
+                    <th class="text-primary" scope="col">Read</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 
 
@@ -113,8 +113,59 @@ title: Database
 <script>
     const addBookButton = document.querySelector("[data-add-book]");
     const getBooksButton = document.querySelector("[data-get-books]");
-    let booksListOriginal = {};
-    const booksListOrdered = {};
+    const orderTitleButton = document.querySelector("[order-title]");
+    let booksListOriginal = {},
+        booksListOrdered = {};
+
+    function btnOrderChange (btnValue) {
+        if (btnValue === "none") {
+            btnOrderReset();
+            btnValue = "ascending";
+        } else if (btnValue === "ascending") {
+            btnValue = "descending";
+        } else {
+            btnValue = "none";
+        }
+        return btnValue;
+    }
+
+    function btnOrderReset () {
+        orderTitleButton.value = "none";
+        orderTitleButton.children[0].classList.add("bi-dash-lg");
+        orderTitleButton.children[0].classList.remove("bi-caret-down-fill");
+        orderTitleButton.children[0].classList.remove("bi-caret-up-fill");
+    }
+
+    function order (orderBtn) {
+        console.log(booksListOriginal);
+        orderBtn.value = btnOrderChange(orderBtn.value);
+        console.log(orderBtn.value);
+        if (orderBtn.value === "ascending") {
+            orderBtn.children[0].classList.remove("bi-dash-lg");
+            orderBtn.children[0].classList.add("bi-caret-down-fill");
+            booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
+            booksListOrdered.sort((a,b) => {
+                let fa = a.title.toLowerCase(),
+                    fb = b.title.toLowerCase();
+                if (fa < fb) {
+                    return -1;
+                } else if (fa > fb) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+        } else if (orderBtn.value === "descending") {
+            orderBtn.children[0].classList.remove("bi-caret-down-fill");
+            orderBtn.children[0].classList.add("bi-caret-up-fill");
+            booksListOrdered.reverse();
+        } else {
+            orderBtn.children[0].classList.add("bi-dash-lg");
+            orderBtn.children[0].classList.remove("bi-caret-up-fill");
+            booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
+        }
+        createTable(booksListOrdered);
+    }
 
     function createTable (results) {
         const booksTable = document.getElementById("booksTable");
@@ -175,7 +226,7 @@ title: Database
             };
             let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
             booksListOriginal = results;
-            console.log(booksListOriginal);
+            btnOrderReset();
             createTable(results);
         } catch (error) {
             console.error(error);
@@ -207,4 +258,5 @@ title: Database
 
     addBookButton.addEventListener("click", addBookToDB);
     getBooksButton.addEventListener("click", getBookList);
+    orderTitleButton.addEventListener("click", function() { order(orderTitleButton) });
 </script>
