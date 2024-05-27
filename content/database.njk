@@ -1,0 +1,276 @@
+---
+layout: layouts/base.njk
+title: Database
+---
+
+<div class="p-5 text-center">
+    <h1 class="text-info">Database with Netlify Functions</h1>
+    <p class="text-primary"></p>
+</div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <form name="addBook" id="addBook" class="row">
+        <div class="row p-0 m-0 mb-3">
+            <p>Enter a new book here:</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Title</span>
+                        <input type="text" class="form-control" name="title" id="title" aria-label="Book title" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Author</span>
+                        <input type="text" class="form-control" name="author" id="author" aria-label="Book author" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Your name</span>
+                        <input type="text" class="form-control" name="readerName" id="readerName" placeholder="Anonymous" aria-label="Your name/nickname" aria-placeholder="Anonymous">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="readOptions" id="yes" value="true" checked>
+                        <label class="form-check-label" for="yes">Book <strong>has</strong> been read</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="readOptions" id="no" value="false">
+                        <label class="form-check-label" for="no">Book <strong>hasn't</strong> been read</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-secondary" type="submit" data-add-book>submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info text-info">
+    <form name="booksList" id="booksList" class="row">
+        <div class="row p-0 m-0">
+            <div class="col-12">
+                <div class="mb-3 text-center">
+                    <button class="btn btn-lg btn-primary" type="submit" data-get-books>Get list of books</button>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <div class="d-flex flex-row mb-3 text-center">
+                    <span class="align-self-center me-2" style="margin-left: auto;">Max list entries: </span>
+                    <select class="form-select form-select-sm" name="limit" aria-label="Number of books in list select" style="width: 75px; margin-right: auto;">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <div class="d-flex flex-row  mb-3">
+                    <span class="align-self-center me-2" style="margin-left: auto;">Search: </span>
+                    <div class="d-flex flex-row text-center input-group input-group-sm" style="width: 325px; margin-right: auto;">
+                        <input type="text" class="form-control form-control" name="search" id="search" aria-label="Search text" style="width: 225px;">
+                        <select class="form-select form-select" name="searchType" aria-label="Search for results in this category" style="width: 100px;">
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row p-0 pt-3 m-0">
+        <table id="booksTable" class="table">
+            <thead>
+                <tr>
+                    <th class="text-primary" scope="col">Title<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-title><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Author<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-author><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Name<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-name><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Read<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-read><i class="bi bi-dash-lg"></i></button></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+<script>
+    const addBookButton = document.querySelector("[data-add-book]");
+    const getBooksButton = document.querySelector("[data-get-books]");
+    const orderTitleButton = document.querySelector("[order-title]"),
+        orderAuthorButton = document.querySelector("[order-author]"),
+        orderNameButton = document.querySelector("[order-name]"),
+        orderReadButton = document.querySelector("[order-read]");
+    let booksListOriginal = {},
+        booksListOrdered = {};
+
+    function btnOrderChange (btnValue) {
+        if (btnValue === "none") {
+            btnOrderReset();
+            btnValue = "ascending";
+        } else if (btnValue === "ascending") {
+            btnValue = "descending";
+        } else {
+            btnValue = "none";
+        }
+        return btnValue;
+    }
+
+    function btnOrderReset () {
+        orderTitleButton.value = "none";
+        orderTitleButton.children[0].classList.add("bi-dash-lg");
+        orderTitleButton.children[0].classList.remove("bi-caret-down-fill");
+        orderTitleButton.children[0].classList.remove("bi-caret-up-fill");
+        orderAuthorButton.value = "none";
+        orderAuthorButton.children[0].classList.add("bi-dash-lg");
+        orderAuthorButton.children[0].classList.remove("bi-caret-down-fill");
+        orderAuthorButton.children[0].classList.remove("bi-caret-up-fill");
+        orderNameButton.value = "none";
+        orderNameButton.children[0].classList.add("bi-dash-lg");
+        orderNameButton.children[0].classList.remove("bi-caret-down-fill");
+        orderNameButton.children[0].classList.remove("bi-caret-up-fill");
+        orderReadButton.value = "none";
+        orderReadButton.children[0].classList.add("bi-dash-lg");
+        orderReadButton.children[0].classList.remove("bi-caret-down-fill");
+        orderReadButton.children[0].classList.remove("bi-caret-up-fill");
+    }
+
+    function order (orderBtn, col) {
+        orderBtn.value = btnOrderChange(orderBtn.value);
+        if (orderBtn.value === "ascending") {
+            orderBtn.children[0].classList.remove("bi-dash-lg");
+            orderBtn.children[0].classList.add("bi-caret-down-fill");
+            booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
+            booksListOrdered.sort((a,b) => {
+                let fa = a[col].toLowerCase(),
+                    fb = b[col].toLowerCase();
+                if (fa < fb) {
+                    return -1;
+                } else if (fa > fb) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+        } else if (orderBtn.value === "descending") {
+            orderBtn.children[0].classList.remove("bi-caret-down-fill");
+            orderBtn.children[0].classList.add("bi-caret-up-fill");
+            booksListOrdered.reverse();
+        } else {
+            orderBtn.children[0].classList.add("bi-dash-lg");
+            orderBtn.children[0].classList.remove("bi-caret-up-fill");
+            booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
+        }
+        createTable(booksListOrdered);
+    }
+
+    function createTable (results) {
+        const booksTable = document.getElementById("booksTable");
+        while (booksTable.childNodes.length > 2) {
+            booksTable.removeChild(booksTable.lastChild);
+        };
+        if (document.getElementById("booksTableBody")) {
+            document.getElementById("booksTableBody").remove();
+        };
+        document.getElementById("booksTable").appendChild(document.createElement("tbody"));
+        document.querySelector("tbody").setAttribute("id", "booksTableBody");
+        document.querySelector("tbody").classList.add("table-group-divider")
+        const booksTableBody = document.getElementById("booksTableBody");
+        results.forEach(result => {
+            const row = document.createElement("tr");
+            if (result.read == "true") {
+                result.read = "bi-check";
+            } else if (result.read == "false") {
+                result.read = "bi-x";
+            }
+            const res = { title: result.title, author: result.author, name: result.name, read: result.read };
+            for (let key in res) {
+                const td = document.createElement("td");
+                if (key !== "read") {
+                    td.innerText = res[key];
+                } else {
+                    const icon = document.createElement("i");
+                    icon.classList.add("bi");
+                    icon.classList.add(res.read);
+                    td.appendChild(icon);
+                }
+                row.appendChild(td);
+            }
+            for (i=0; i<row.children.length; i++) {
+                if (i < row.children.length - 1) {
+                    row.children[i].classList.add('text-info');
+                } else if (result.read === "bi-check") {
+                    row.children[i].classList.add('text-success');
+                } else {
+                    row.children[i].classList.add('text-danger');
+                }
+            }
+            booksTableBody.appendChild(row);
+        });
+    }
+
+    async function getBookList(event) {
+        event.preventDefault();
+        try {
+            const booksListForm = document.getElementById("booksList");
+            const limit = booksListForm.elements.limit.value;
+            const search = booksListForm.elements.search.value;
+            const searchType = booksListForm.elements.searchType.value;
+            const myObj = {
+                limit,
+                search,
+                searchType
+            };
+            let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
+            booksListOriginal = results;
+            btnOrderReset();
+            createTable(results);
+        } catch (error) {
+            console.error(error);
+        };
+    };
+
+    function buildQuery (data) {
+        return new URLSearchParams(data).toString();
+    }
+
+    async function addBookToDB(event) {
+        event.preventDefault();
+        const addBookForm = document.getElementById("addBook");
+        const title = addBookForm.elements.title.value;
+        const author = addBookForm.elements.author.value;
+        let name = addBookForm.elements.readerName.value;
+        if (!name) { name = "Anonymous" };
+        const read = addBookForm.elements.readOptions.value;
+        const myObj = {
+            title,
+            author,
+            name,
+            read
+        };
+        const queryString = "/.netlify/functions/add_books?" + buildQuery(myObj);
+        const result = await fetch(queryString);
+        addBookForm.reset();
+    }
+
+    addBookButton.addEventListener("click", addBookToDB);
+    getBooksButton.addEventListener("click", getBookList);
+    orderTitleButton.addEventListener("click", function() { order(orderTitleButton, "title") });
+    orderAuthorButton.addEventListener("click", function() { order(orderAuthorButton, "author") });
+    orderNameButton.addEventListener("click", function() { order(orderNameButton, "name") });
+    orderReadButton.addEventListener("click", function() { order(orderReadButton, "read") });
+</script>
