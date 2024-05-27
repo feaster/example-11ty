@@ -71,8 +71,6 @@ title: Database
                 <div class="d-flex flex-row mb-3 text-center">
                     <span class="align-self-center me-2" style="margin-left: auto;">Max list entries: </span>
                     <select class="form-select form-select-sm" name="limit" aria-label="Number of books in list select" style="width: 75px; margin-right: auto;">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -98,10 +96,10 @@ title: Database
         <table id="booksTable" class="table">
             <thead>
                 <tr>
-                    <th class="text-primary" scope="col">Title<button id="orderTitleButton" class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-title><i class="bi bi-dash-lg"></i></button></th>
-                    <th class="text-primary" scope="col">Author</th>
-                    <th class="text-primary" scope="col">Name</th>
-                    <th class="text-primary" scope="col">Read</th>
+                    <th class="text-primary" scope="col">Title<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-title><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Author<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-author><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Name<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-name><i class="bi bi-dash-lg"></i></button></th>
+                    <th class="text-primary" scope="col">Read<button class="btn btn-secondary" style="--bs-btn-padding-y: .1rem; --bs-btn-padding-x: .4rem; --bs-btn-font-size: .75rem; margin-left: .5rem;" value="none" order-read><i class="bi bi-dash-lg"></i></button></th>
                 </tr>
             </thead>
         </table>
@@ -113,7 +111,10 @@ title: Database
 <script>
     const addBookButton = document.querySelector("[data-add-book]");
     const getBooksButton = document.querySelector("[data-get-books]");
-    const orderTitleButton = document.querySelector("[order-title]");
+    const orderTitleButton = document.querySelector("[order-title]"),
+        orderAuthorButton = document.querySelector("[order-author]"),
+        orderNameButton = document.querySelector("[order-name]"),
+        orderReadButton = document.querySelector("[order-read]");
     let booksListOriginal = {},
         booksListOrdered = {};
 
@@ -134,9 +135,21 @@ title: Database
         orderTitleButton.children[0].classList.add("bi-dash-lg");
         orderTitleButton.children[0].classList.remove("bi-caret-down-fill");
         orderTitleButton.children[0].classList.remove("bi-caret-up-fill");
+        orderAuthorButton.value = "none";
+        orderAuthorButton.children[0].classList.add("bi-dash-lg");
+        orderAuthorButton.children[0].classList.remove("bi-caret-down-fill");
+        orderAuthorButton.children[0].classList.remove("bi-caret-up-fill");
+        orderNameButton.value = "none";
+        orderNameButton.children[0].classList.add("bi-dash-lg");
+        orderNameButton.children[0].classList.remove("bi-caret-down-fill");
+        orderNameButton.children[0].classList.remove("bi-caret-up-fill");
+        orderReadButton.value = "none";
+        orderReadButton.children[0].classList.add("bi-dash-lg");
+        orderReadButton.children[0].classList.remove("bi-caret-down-fill");
+        orderReadButton.children[0].classList.remove("bi-caret-up-fill");
     }
 
-    function order (orderBtn) {
+    function order (orderBtn, col) {
         console.log(booksListOriginal);
         orderBtn.value = btnOrderChange(orderBtn.value);
         console.log(orderBtn.value);
@@ -144,9 +157,10 @@ title: Database
             orderBtn.children[0].classList.remove("bi-dash-lg");
             orderBtn.children[0].classList.add("bi-caret-down-fill");
             booksListOrdered = booksListOriginal.map(u => ({ ...u, approved: true }));
+            console.log(orderBtn);
             booksListOrdered.sort((a,b) => {
-                let fa = a.title.toLowerCase(),
-                    fb = b.title.toLowerCase();
+                let fa = a[col].toLowerCase(),
+                    fb = b[col].toLowerCase();
                 if (fa < fb) {
                     return -1;
                 } else if (fa > fb) {
@@ -258,5 +272,8 @@ title: Database
 
     addBookButton.addEventListener("click", addBookToDB);
     getBooksButton.addEventListener("click", getBookList);
-    orderTitleButton.addEventListener("click", function() { order(orderTitleButton) });
+    orderTitleButton.addEventListener("click", function() { order(orderTitleButton, "title") });
+    orderAuthorButton.addEventListener("click", function() { order(orderAuthorButton, "author") });
+    orderNameButton.addEventListener("click", function() { order(orderNameButton, "name") });
+    orderReadButton.addEventListener("click", function() { order(orderReadButton, "read") });
 </script>
