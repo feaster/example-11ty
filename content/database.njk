@@ -45,7 +45,7 @@ title: Database
                         <label class="form-check-label" for="yes">Book <strong>has</strong> been read</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="readOptions" id="no" value="flase">
+                        <input class="form-check-input" type="radio" name="readOptions" id="no" value="false">
                         <label class="form-check-label" for="no">Book <strong>hasn't</strong> been read</label>
                     </div>
                 </div>
@@ -113,6 +113,53 @@ title: Database
 <script>
     const addBookButton = document.querySelector("[data-add-book]");
     const getBooksButton = document.querySelector("[data-get-books]");
+    let booksListOriginal = {};
+    const booksListOrdered = {};
+
+    function createTable (results) {
+        const booksTable = document.getElementById("booksTable");
+        while (booksTable.childNodes.length > 2) {
+            booksTable.removeChild(booksTable.lastChild);
+        };
+        if (document.getElementById("booksTableBody")) {
+            document.getElementById("booksTableBody").remove();
+        };
+        document.getElementById("booksTable").appendChild(document.createElement("tbody"));
+        document.querySelector("tbody").setAttribute("id", "booksTableBody");
+        document.querySelector("tbody").classList.add("table-group-divider")
+        const booksTableBody = document.getElementById("booksTableBody");
+        results.forEach(result => {
+            const row = document.createElement("tr");
+            if (result.read == "true") {
+                result.read = "bi-check";
+            } else if (result.read == "false") {
+                result.read = "bi-x";
+            }
+            const res = { title: result.title, author: result.author, name: result.name, read: result.read };
+            for (let key in res) {
+                const td = document.createElement("td");
+                if (key !== "read") {
+                    td.innerText = res[key];
+                } else {
+                    const icon = document.createElement("i");
+                    icon.classList.add("bi");
+                    icon.classList.add(res.read);
+                    td.appendChild(icon);
+                }
+                row.appendChild(td);
+            }
+            for (i=0; i<row.children.length; i++) {
+                if (i < row.children.length - 1) {
+                    row.children[i].classList.add('text-info');
+                } else if (result.read === "bi-check") {
+                    row.children[i].classList.add('text-success');
+                } else {
+                    row.children[i].classList.add('text-danger');
+                }
+            }
+            booksTableBody.appendChild(row);
+        });
+    }
 
     async function getBookList(event) {
         event.preventDefault();
@@ -127,47 +174,9 @@ title: Database
                 searchType
             };
             let results = await fetch(`/.netlify/functions/get_books?${buildQuery(myObj)}`).then(response => response.json());
-            const booksTable = document.getElementById("booksTable");
-            while (booksTable.childNodes.length > 2) {
-                booksTable.removeChild(booksTable.lastChild);
-            };
-            if (document.getElementById("booksTableBody")) {
-                document.getElementById("booksTableBody").remove();
-            };
-            document.getElementById("booksTable").appendChild(document.createElement("tbody"));
-            document.querySelector("tbody").setAttribute("id", "booksTableBody");
-            const booksTableBody = document.getElementById("booksTableBody");
-            results.forEach(result => {
-                const row = document.createElement("tr");
-                if (result.read == "true") {
-                    result.read = "bi-check";
-                } else {
-                    result.read = "bi-x";
-                }
-                const res = { title: result.title, author: result.author, name: result.name, read: result.read };
-                for (let key in res) {
-                    const td = document.createElement("td");
-                    if (key !== "read") {
-                        td.innerText = res[key];
-                    } else {
-                        const icon = document.createElement("i");
-                        icon.classList.add("bi");
-                        icon.classList.add(res.read);
-                        td.appendChild(icon);
-                    }
-                    row.appendChild(td);
-                }
-                for (i=0; i<row.children.length; i++) {
-                    if (i < row.children.length - 1) {
-                        row.children[i].classList.add('text-info');
-                    } else if (result.read === "bi-check") {
-                        row.children[i].classList.add('text-success');
-                    } else {
-                        row.children[i].classList.add('text-danger');
-                    }
-                }
-                booksTableBody.appendChild(row);
-            });
+            booksListOriginal = results;
+            console.log(booksListOriginal);
+            createTable(results);
         } catch (error) {
             console.error(error);
         };
