@@ -21,7 +21,7 @@ title: Loops, Arrays, and Objects
                 </div>
             </div>
             <div class="mb-3 text-lg-center">
-                <button class="btn btn-secondary" type="submit">submit</button>
+                <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
             </div>
         </div>
         <div class="row p-0 pt-3 m-0">
@@ -47,5 +47,49 @@ title: Loops, Arrays, and Objects
         event.preventDefault();
         const multiple = timesTablesForm.elements.number.value;
         timesTables(multiple);
+    });
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info">
+    <form name="fruit" id="fruit" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Arrays are used to store multiple values (they can also store other arrays and objects). Array methods can be used to change the array in some way. 
+                When the button is pressed an array, containg names of fruit, is listed below. You are then prompted to add a new fruit to the array, and the new list is printed.
+            </p>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-lg btn-primary" type="submit">Print array of fruits</button>
+        </div>
+        <div class="row p-0 m-0 mt-2">
+            <p id="fruitList" class="fw-bold text-info">...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const fruitForm = document.getElementById('fruit');
+    fruitForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const fruitList = document.getElementById("fruitList");
+        const fruit = ["apple", "bannana", "pear", "orange", "kiwi"];
+        fruitList.innerHTML = "";
+        for (i=0; i<fruit.length; i++) {
+            fruitList.innerHTML += `${fruit[i]}`;
+            if (i < fruit.length-1) {
+                fruitList.innerHTML += `, `;
+            }
+        }
+        // Gets user to add another fruit to the end of the list
+        setTimeout( function () {
+            const newFruit = prompt("Add new fruit to list");
+            fruit.push(newFruit);
+            fruitList.innerHTML += `<br>`;
+            for (i=0; i<fruit.length; i++) {
+                fruitList.innerHTML += `${fruit[i]}`;
+                if (i < fruit.length-1) {
+                    fruitList.innerHTML += `, `;
+                }
+            }
+        }, 100);
     });
 </script>
