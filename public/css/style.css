@@ -57,6 +57,15 @@ html, body {
     background-color: #965749;
 }
 
+.dropdown-item {
+    color: #393f5d;
+}
+
+.dropdown-item:hover {
+    background-color: #F2F4F3;
+    color: #965749;
+}
+
 .card {
     width: 18rem;
     height: fit-content;
