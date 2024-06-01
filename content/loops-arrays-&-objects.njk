@@ -232,3 +232,96 @@ title: Loops, Arrays, and Objects
         document.getElementById("discountPrice").innerText = `Total with discount: £${total(shoppingCart,discount,type)}`;
     })
 </script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <div class="row p-0 m-0 my-2">
+        <p>We can process the data in an array, for example below we can calculate the mean, median, and mode of a dataset.</p>
+        <p class="fw-bold">Data = [1, 5, 2, 3, 4, 5, 1]</p>
+    </div>
+    <form id="averages" class="d-flex flex-row p-0 m-0">
+        <div class="col-12 col-sm-5 col-md-4 col-lg-3 align-self-center">
+            <div class="mb-3 me-3">
+                <select class="form-select form-select" name="averageType" id="averageType" aria-label="Which average do you want?">
+                    <option value="mean">Mean</option>
+                    <option value="median">Median</option>
+                    <option value="mode">Mode</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="mb-3 text-lg-center">
+                <button class="btn btn-lg btn-secondary" type="submit">Get average</button>
+            </div>
+        </div>
+    </form>
+    <div class="row p-0 pt-3 m-0">
+        <p id="average" class="fw-bold">...</p>
+    </div>
+</div>
+
+<script>
+    const averagesForm = document.getElementById("averages");
+
+    const numberList =[1, 5, 2, 3, 4, 5, 1];
+
+    function mean(numbers) {
+        let total = 0;
+        for (i=0; i<numbers.length; i++) {
+            total += numbers[i];
+        }
+        return total/numbers.length;
+    }
+
+    function median(numbers) {
+        numbers.sort((a,b) => {return a-b});
+        if (numbers.length%2 === 1) {
+            return numbers[(numbers.length-1)/2];
+        } else {
+            return (numbers[numbers.length/2]+numbers[(numbers.length/2)-1])/2;
+        }
+    }
+
+    function mode(numbers) {
+        const numberCount = [];
+        for (i=0; i<numbers.length; i++) {
+            let same = 0;
+            for (j=0; j<numberCount.length; j++) {
+            if (numbers[i] === numberCount[j].number) {
+                same = 1;
+                numberCount[j].count += 1;
+                break;
+            }
+            }
+            if (same === 0) {
+            numberCount.push({"number": numbers[i], "count": 1});
+            }
+        }
+        numberCount.sort((a,b) => {return b.count - a.count});
+        const returnMode = [numberCount[0].number];
+        for (i=1; i<numberCount.length; i++) {
+            if (numberCount[i].count === numberCount[0].count) {
+            returnMode.push(numberCount[i].number);
+            }
+        }
+        return returnMode.sort((a,b) => {return a - b});
+    }
+
+    function average(numbers,type) {
+        switch (type) {
+            case "mean":
+            return `mean = ${mean(numbers)}`;
+            case "median":
+            return `median = ${median(numbers)}`;
+            case "mode":
+            return `mode = ${mode(numbers)}`;
+            default:
+            return "type not recognised";
+        }
+    }
+
+    averagesForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const type = document.getElementById("averageType").value;
+        document.getElementById("average").innerText = average(numberList,type);
+    })
+</script>
