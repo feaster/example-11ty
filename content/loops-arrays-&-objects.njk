@@ -1,0 +1,327 @@
+---
+layout: layouts/base.njk
+title: Loops, Arrays, and Objects
+---
+
+<div class="p-5 text-center">
+  <h1 class="text-info">Loops, Arrays, and Objects</h1>
+  <p class="text-primary">Arrays and objects are ways of storing data, in lists or key value pairs respectively. Loops are very useful for accessing the data within these.</p>
+</div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <form name="timesTablesForm" id="timesTablesForm" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>A for loop is used to output the times tables of the number that you enter.</p>
+        </div>
+        <div class="d-flex flex-row p-0 m-0">
+            <div class="mb-3 me-3 align-self-center">
+                <div class="input-group">
+                    <span class="input-group-text">Number</span>
+                    <input type="number" class="form-control" name="number" id="number" aria-label="Number" required>
+                </div>
+            </div>
+            <div class="mb-3 text-lg-center">
+                <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="timesTables" class="fw-bold"></p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const timesTablesForm = document.getElementById("timesTablesForm");
+
+    function timesTables (multiple) {
+        const timesTables = document.getElementById("timesTables");
+        timesTables.innerHTML = "";
+        for (i=1; i<12; i++) {
+            timesTables.innerHTML += `${multiple} x ${i} = ${i*multiple}<br>`;
+        };
+        timesTables.innerHTML += `${multiple} x ${12} = ${12*multiple}`;
+    }
+
+    timesTablesForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const multiple = timesTablesForm.elements.number.value;
+        timesTables(multiple);
+    });
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info">
+    <form name="fruit" id="fruit" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Arrays are used to store multiple values (they can also store other arrays and objects). Array methods can be used to change the array in some way. 
+                When the button is pressed an array, containg names of fruit, is listed below. You are then prompted to add a new fruit to the array, and the new list is printed.
+            </p>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-lg btn-primary" type="submit">Print array of fruits</button>
+        </div>
+        <div class="row p-0 m-0 mt-2">
+            <p id="fruitList" class="fw-bold text-info">...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const fruitForm = document.getElementById('fruit');
+    fruitForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const fruitList = document.getElementById("fruitList");
+        const fruit = ["apple", "bannana", "pear", "orange", "kiwi"];
+        fruitList.innerHTML = "";
+        for (i=0; i<fruit.length; i++) {
+            fruitList.innerHTML += `${fruit[i]}`;
+            if (i < fruit.length-1) {
+                fruitList.innerHTML += `, `;
+            }
+        }
+        // Gets user to add another fruit to the end of the list
+        setTimeout( function () {
+            const newFruit = prompt("Add new fruit to list");
+            if (newFruit !== null) {
+                fruit.push(newFruit);
+                fruitList.innerHTML += `<br>`;
+                for (i=0; i<fruit.length; i++) {
+                    fruitList.innerHTML += `${fruit[i]}`;
+                    if (i < fruit.length-1) {
+                        fruitList.innerHTML += `, `;
+                    }
+                }
+            }
+        }, 100);
+    });
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <div class="row p-0 m-0 my-2">
+        <p>We use objects to store key value pairs. Both arrays and objects can store other arrays and objects.
+            In this example a recipe is stored in an object, a method (function) is called to print "Let's make fruit salad". 
+            The ingredients and directions are stored as arrays in the recipe object - they are looped over to print out the lists.</p>
+    </div>
+    <div class="d-flex flex-row p-0 m-0">
+        <div class="mb-3 text-lg-center">
+            <button class="btn btn-lg btn-secondary" type="button" data-get-recipe>Get recipe</button>
+        </div>
+    </div>
+    <div class="row p-0 pt-3 m-0">
+        <p id="recipeName" class="fw-bold">Recipe</p>
+        <div class="col-sm-6">
+            <p class="fw-bold">Ingredients:</p>
+            <ul id="recipeIngredients"></ul>
+        </div>
+        <div class="col-sm-6">
+            <p class="fw-bold">Method:</p>
+            <ol id="recipeMethod"></ol>
+        </div>
+    </div>
+</div>
+
+<script>
+    const recipeBtn = document.querySelector("[data-get-recipe]");
+
+    const recipe = {
+        title: "fruit salad",
+        servings: 4,
+        ingredients: ["apple", "orange", "mango", "kiwi"],
+        directions: ["slice up fruit", "mix together"],
+        letsCook() {document.getElementById("recipeName").innerText = `Let's make ${recipe.title}`}
+    };
+
+    getRecipeIngredients = (recipe) => {
+        const ingredients = document.getElementById("recipeIngredients");
+        ingredients.innerHTML = "";
+        for (i=0; i<recipe.ingredients.length; i++) {
+            ingredients.innerHTML += `<li>${recipe.ingredients[i]}</li>`;
+        }
+    }
+
+    getRecipeInstructions = (recipe) => {
+        const directions = document.getElementById("recipeMethod");
+        directions.innerHTML = "";
+        for (i=0; i<recipe.directions.length; i++) {
+            directions.innerHTML += `<li>${recipe.directions[i]}</li>`;
+        }
+    }
+
+    recipeBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        recipe.letsCook();
+        getRecipeIngredients(recipe);
+        getRecipeInstructions(recipe);
+    })
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-info">
+    <form name="shoppingCart" id="shoppingCart" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>Another example of how data can be stored is with an array of objects, like in this shopping cart. A discount can be applied to all of it or, using the object keys, a discount can be applied to a certain type only.</p>
+        </div>
+        <div class="row p-0 m-0 my-2">
+            <div class="col-12 col-md-5">
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Discount</span>
+                        <input type="number" step="1" min="0" max="100" class="form-control" name="discount" id="discount" aria-label="Disount percentage to be applied" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-5">
+                <div class="mb-3">
+                    <select class="form-select form-select" name="type" id="type" aria-label="Type of product to be discounted">
+                        <option value="food">Food</option>
+                        <option value="alcohol">Alcohol</option>
+                        <option value="home">Home</option>
+                        <option value="any">Any</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-2">
+                <div class="mb-3 text-lg-center">
+                    <button class="btn btn-lg btn-primary" type="submit">Apply</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 m-0 mt-2">
+            <p class="fw-bold text-info">Total before discount: £39.37</p>
+            <p id="discountPrice" class="fw-bold text-info">Total with discount: </p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const discountForm = document.getElementById("shoppingCart");
+
+    let shoppingCart = [
+        { name: "loaf of bread", type: "food", quantity: 1, price: 0.85 },
+        { name: "multipack beans", type: "food", quantity: 1, price: 1 },
+        { name: "mushrooms", type: "food", quantity: 10, price: 0.1 },
+        { name: "can of beer", type: "alcohol", quantity: 4, price: 1.1 },
+        { name: "prosecco", type: "alcohol", quantity: 1, price: 8.99 },
+        { name: "steak", type: "food", quantity: 2, price: 3.99 },
+        { name: "blue cheese", type: "food", quantity: 1, price: 2.99 },
+        { name: "candles", type: "home", quantity: 3, price: 1.99 },
+        { name: "cheesecake", type: "food", quantity: 1, price: 4.99 },
+        { name: "onions", type: "food", quantity: 3, price: 0.4 },
+    ];
+
+    function discount(cartItem, discountAmount, type) {
+        if (cartItem.type === type || type === "any") {
+            return cartItem.price * (1 - discountAmount/100);
+        } else {
+            return cartItem.price;
+        }
+    }
+
+    function total(cart, discountAmount, type) {
+        let totalPrice = 0;
+        for (i=0; i<cart.length; i++) {
+            totalPrice += discount(cart[i], discountAmount, type) * cart[i].quantity;
+        }
+        totalPrice = totalPrice.toFixed(2);
+        return totalPrice;
+    }
+
+    discountForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const discount = document.getElementById("discount").value;
+        const type = document.getElementById("type").value;
+        document.getElementById("discountPrice").innerText = `Total with discount: £${total(shoppingCart,discount,type)}`;
+    })
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <div class="row p-0 m-0 my-2">
+        <p>We can process the data in an array, for example below we can calculate the mean, median, and mode of a dataset.</p>
+        <p class="fw-bold">Data = [1, 5, 2, 3, 4, 5, 1]</p>
+    </div>
+    <form id="averages" class="d-flex flex-row p-0 m-0">
+        <div class="col-12 col-sm-5 col-md-4 col-lg-3 align-self-center">
+            <div class="mb-3 me-3">
+                <select class="form-select form-select" name="averageType" id="averageType" aria-label="Which average do you want?">
+                    <option value="mean">Mean</option>
+                    <option value="median">Median</option>
+                    <option value="mode">Mode</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="mb-3 text-lg-center">
+                <button class="btn btn-lg btn-secondary" type="submit">Get average</button>
+            </div>
+        </div>
+    </form>
+    <div class="row p-0 pt-3 m-0">
+        <p id="average" class="fw-bold">...</p>
+    </div>
+</div>
+
+<script>
+    const averagesForm = document.getElementById("averages");
+
+    const numberList =[1, 5, 2, 3, 4, 5, 1];
+
+    function mean(numbers) {
+        let total = 0;
+        for (i=0; i<numbers.length; i++) {
+            total += numbers[i];
+        }
+        return total/numbers.length;
+    }
+
+    function median(numbers) {
+        numbers.sort((a,b) => {return a-b});
+        if (numbers.length%2 === 1) {
+            return numbers[(numbers.length-1)/2];
+        } else {
+            return (numbers[numbers.length/2]+numbers[(numbers.length/2)-1])/2;
+        }
+    }
+
+    function mode(numbers) {
+        const numberCount = [];
+        for (i=0; i<numbers.length; i++) {
+            let same = 0;
+            for (j=0; j<numberCount.length; j++) {
+            if (numbers[i] === numberCount[j].number) {
+                same = 1;
+                numberCount[j].count += 1;
+                break;
+            }
+            }
+            if (same === 0) {
+            numberCount.push({"number": numbers[i], "count": 1});
+            }
+        }
+        numberCount.sort((a,b) => {return b.count - a.count});
+        const returnMode = [numberCount[0].number];
+        for (i=1; i<numberCount.length; i++) {
+            if (numberCount[i].count === numberCount[0].count) {
+            returnMode.push(numberCount[i].number);
+            }
+        }
+        return returnMode.sort((a,b) => {return a - b});
+    }
+
+    function average(numbers,type) {
+        switch (type) {
+            case "mean":
+            return `mean = ${mean(numbers)}`;
+            case "median":
+            return `median = ${median(numbers)}`;
+            case "mode":
+            return `mode = ${mode(numbers)}`;
+            default:
+            return "type not recognised";
+        }
+    }
+
+    averagesForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const type = document.getElementById("averageType").value;
+        document.getElementById("average").innerText = average(numberList,type);
+    })
+</script>

@@ -140,7 +140,55 @@ title: Functions & Control Flow
     });
 </script>
 
-<div class="container-fluid m-0 p-5 bg-body-inverse-info">
+<div class="container-fluid p-5 bg-body-inverse-info">
+    <form name="tipCalculator" id="tipCalculator" class="row">
+        <div class="row p-0 m-0 my-2">
+            <p>This JavaScript function calculates a total bill based on the pre-tip total and tip percentage that you enter.</p>
+        </div>
+        <div class="row p-0 m-0">
+            <div class="col-12 col-sm-6 col-lg-5">
+                <div class="mb-3">
+                    <label for="preTipTotal" class="form-label">Pre-tip total</label>
+                    <div class="input-group">
+                        <span class="input-group-text">£</span>
+                        <input type="number" step="0.01" min="0" class="form-control" name="preTipTotal" id="preTipTotal" placeholder="0.00" aria-label="Pre-tip total" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-5">
+                <div class="mb-3">
+                    <label for="tipPercentage" class="form-label">Tip percentage</label>
+                    <div class="input-group">
+                        <input type="number" min="0" class="form-control" name="tipPercentage" id="tipPercentage" placeholder="0" aria-label="Tip percentage" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-2 align-self-end">
+                <div class="mb-3 text-lg-center">
+                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row p-0 pt-3 m-0">
+            <p id="totalBill" class="fw-bold text-info">Your total bill, with tip, is ...</p>
+        </div>
+    </form>
+</div>
+
+<script>
+    const tipForm = document.getElementById('tipCalculator');
+    tipForm.addEventListener('submit', function(event) {
+        const preTipTotal = tipForm.elements.preTipTotal.value;
+        const tipPercentage = tipForm.elements.tipPercentage.value;
+        event.preventDefault();
+        let newTotal = preTipTotal * (1 + tipPercentage/100);
+        newTotal = newTotal.toFixed(2);
+        document.getElementById("totalBill").innerHTML = `Your total bill, with tip, is £${newTotal}`;
+    });
+</script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
     <form name="calculator" id="calculator" class="row">
         <div class="row p-0 m-0 mb-3">
             <p>This form takes 2 numbers and an operator, as a string, which it passes to a function using a switch statement to determine what calculation to do. 
@@ -175,12 +223,12 @@ title: Functions & Control Flow
             </div>
             <div class="col-12 col-lg-2 align-self-end">
                 <div class="mb-3 text-lg-center">
-                    <button class="btn btn-lg btn-primary" type="submit">submit</button>
+                    <button class="btn btn-lg btn-secondary" type="submit">submit</button>
                 </div>
             </div>
         </div>
         <div class="row p-0 pt-3 m-0">
-            <p id="calculation" class="fw-bold text-info">Number 1 (Operator) Number 2 = ...</p>
+            <p id="calculation" class="fw-bold">Number 1 (Operator) Number 2 = ...</p>
         </div>
     </form>
 </div>

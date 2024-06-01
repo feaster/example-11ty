@@ -2,16 +2,21 @@ body {
     background-color: #F2F4F3;
 }
 
+::selection {
+  background: #957D60;
+  color: #F2F4F3;
+}
+
 html, body {
     height: 100%;
-  }
-  body {
+}
+body {
     display: flex;
     flex-direction: column;
-  }
-  .footer {
+}
+.footer {
     flex-shrink: 0;
-  }
+}
 
 .bg-body-inverse-info {
     background-color: #F2F4F3;
@@ -55,6 +60,15 @@ html, body {
 
 .navbar-toggler:hover {
     background-color: #965749;
+}
+
+.dropdown-item {
+    color: #393f5d;
+}
+
+.dropdown-item:hover {
+    background-color: #F2F4F3;
+    color: #965749;
 }
 
 .card {
