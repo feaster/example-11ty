@@ -81,12 +81,14 @@ title: Loops, Arrays, and Objects
         // Gets user to add another fruit to the end of the list
         setTimeout( function () {
             const newFruit = prompt("Add new fruit to list");
-            fruit.push(newFruit);
-            fruitList.innerHTML += `<br>`;
-            for (i=0; i<fruit.length; i++) {
-                fruitList.innerHTML += `${fruit[i]}`;
-                if (i < fruit.length-1) {
-                    fruitList.innerHTML += `, `;
+            if (newFruit !== null) {
+                fruit.push(newFruit);
+                fruitList.innerHTML += `<br>`;
+                for (i=0; i<fruit.length; i++) {
+                    fruitList.innerHTML += `${fruit[i]}`;
+                    if (i < fruit.length-1) {
+                        fruitList.innerHTML += `, `;
+                    }
                 }
             }
         }, 100);
