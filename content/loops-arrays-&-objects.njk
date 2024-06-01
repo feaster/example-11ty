@@ -132,6 +132,7 @@ title: Loops, Arrays, and Objects
 
     getRecipeIngredients = (recipe) => {
         const ingredients = document.getElementById("recipeIngredients");
+        ingredients.innerHTML = "";
         for (i=0; i<recipe.ingredients.length; i++) {
             ingredients.innerHTML += `<li>${recipe.ingredients[i]}</li>`;
         }
@@ -139,6 +140,7 @@ title: Loops, Arrays, and Objects
 
     getRecipeInstructions = (recipe) => {
         const directions = document.getElementById("recipeMethod");
+        directions.innerHTML = "";
         for (i=0; i<recipe.directions.length; i++) {
             directions.innerHTML += `<li>${recipe.directions[i]}</li>`;
         }
