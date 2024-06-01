@@ -94,3 +94,60 @@ title: Loops, Arrays, and Objects
         }, 100);
     });
 </script>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+    <div class="row p-0 m-0 my-2">
+        <p>We use objects to store key value pairs. Both arrays and objects can store other arrays and objects.
+            In this example a recipe is stored in an object, a method (function) is called to print "Let's make fruit salad". 
+            The ingredients and directions are stored as arrays in the recipe object - they are looped over to print out the lists.</p>
+    </div>
+    <div class="d-flex flex-row p-0 m-0">
+        <div class="mb-3 text-lg-center">
+            <button class="btn btn-lg btn-secondary" type="button" data-get-recipe>Get recipe</button>
+        </div>
+    </div>
+    <div class="row p-0 pt-3 m-0">
+        <p id="recipeName" class="fw-bold">Recipe</p>
+        <div class="col-sm-6">
+            <p class="fw-bold">Ingredients:</p>
+            <ul id="recipeIngredients"></ul>
+        </div>
+        <div class="col-sm-6">
+            <p class="fw-bold">Method:</p>
+            <ol id="recipeMethod"></ol>
+        </div>
+    </div>
+</div>
+
+<script>
+    const recipeBtn = document.querySelector("[data-get-recipe]");
+
+    const recipe = {
+        title: "fruit salad",
+        servings: 4,
+        ingredients: ["apple", "orange", "mango", "kiwi"],
+        directions: ["slice up fruit", "mix together"],
+        letsCook() {document.getElementById("recipeName").innerText = `Let's make ${recipe.title}`}
+    };
+
+    getRecipeIngredients = (recipe) => {
+        const ingredients = document.getElementById("recipeIngredients");
+        for (i=0; i<recipe.ingredients.length; i++) {
+            ingredients.innerHTML += `<li>${recipe.ingredients[i]}</li>`;
+        }
+    }
+
+    getRecipeInstructions = (recipe) => {
+        const directions = document.getElementById("recipeMethod");
+        for (i=0; i<recipe.directions.length; i++) {
+            directions.innerHTML += `<li>${recipe.directions[i]}</li>`;
+        }
+    }
+
+    recipeBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        recipe.letsCook();
+        getRecipeIngredients(recipe);
+        getRecipeInstructions(recipe);
+    })
+</script>
