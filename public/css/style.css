@@ -82,7 +82,7 @@ body {
     }
 }
 
-/* Shapes for drinks machine */
+/* drinks machine */
 
 .nozzle-cola {
     position: absolute;
@@ -243,6 +243,8 @@ body {
     z-index: 3;
     font-family: "digital_dreamregular";
 }
+
+/* table styling */
 
 .table-group-divider {
     color: #808da4;
