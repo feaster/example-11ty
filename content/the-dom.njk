@@ -67,9 +67,9 @@ title: The DOM
 
 <script>
 const priorityImages = {
-  low: '<i class="bi bi-flag-fill text-success"></i>',
-  medium: '<i class="bi bi-flag-fill text-warning"></i>',
-  high: '<i class="bi bi-flag-fill text-danger"></i>',
+  low: 'text-success',
+  medium: 'text-warning',
+  high: 'text-danger',
 };
 
 const form = document.forms.todo;
@@ -92,9 +92,11 @@ form.addEventListener("submit", function (event) {
 
 function createTodo(title) {
   const list = document.createElement("li");
-  list.innerHTML = `${priorityImages[prioritySelect.value]}`;
-  list.innerHTML += "&ensp;";
-  list.innerHTML += `${title}`;
+  const text = document.createTextNode(`\xa0\xa0${title}`);
+  const flag = document.createElement("i");
+  flag.classList.add("bi", "bi-flag-fill", `${priorityImages[prioritySelect.value]}`);
+  list.appendChild(flag);
+  list.appendChild(text);
   list.classList.add("todo", "just-created");
   list.addEventListener("click", (e) => {e.currentTarget.remove();});
   return list;
