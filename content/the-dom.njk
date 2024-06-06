@@ -7,3 +7,96 @@ title: The DOM
   <h1 class="text-info">The DOM</h1>
   <p class="text-primary">The document object model (DOM) is the HTML element structure of the page, and what we use to apply our JavaScript.</p>
 </div>
+
+<div class="container-fluid m-0 p-5 bg-body-inverse-tertiary text-secondary">
+  <form id="todo" class="row">
+    <div class="row p-0 m-0 mb-3">
+      <h2 class="mb-3">Todo</h2>
+      <p>This is an interactive todo list. New items can be added with a title and priority using the below form. Once added the most recent todo is highlighted, and done tasks can be removed with a click on the item.</p>
+    </div>
+    <div class="row p-0 m-0">
+      <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="input-group">
+          <label for="title" class="input-group-text">Title</label>
+          <input type="text" class="form-control" name="title" id="title" aria-label="Todo list item title" required>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="d-flex flex-row mb-3">
+          <div class="input-group" style="width: 200px;">
+            <label for="priority" class="input-group-text">Priority</label>
+            <select class="form-select" name="priority" id="priority" aria-label="Todo list item priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-secondary ms-4">Add</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ul id="todo-pane" class="text-info"></ul>
+  
+</div>
+
+<style>
+/* The unordered list containing the todos */
+#todo-pane {
+  padding: 0;
+}
+
+/* The todos themselves */
+#todo-pane li {
+  display: flex;
+  max-width: 20em;
+  align-items: center;
+  background-color: lightyellow;
+  border: thin #d99531 solid;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin: 1em 0;
+}
+
+/* A todo that was just created */
+.just-created {
+  box-shadow: 0 0 20px 1px #d99531;
+}
+</style>
+
+<script>
+const priorityImages = {
+  low: '<i class="bi bi-flag-fill text-success"></i>',
+  medium: '<i class="bi bi-flag-fill text-warning"></i>',
+  high: '<i class="bi bi-flag-fill text-danger"></i>',
+};
+
+const form = document.forms.todo;
+const todoPane = document.getElementById("todo-pane");
+const titleInput = document.getElementById("title");
+const prioritySelect = document.getElementById("priority");
+const allTodos = document.querySelectorAll(".todo");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const newTodo = titleInput.value;
+  console.log(newTodo);
+  for (i=0; i<todoPane.children.length; i++) {
+    todoPane.children[i].classList.remove("just-created");
+  }
+  todoPane.appendChild(createTodo(newTodo));
+  console.log(todoPane);
+  titleInput.value = "";
+});
+
+function createTodo(title) {
+  const list = document.createElement("li");
+  list.innerHTML = `${priorityImages[prioritySelect.value]}`;
+  list.innerHTML += "&ensp;";
+  list.innerHTML += `${title}`;
+  list.classList.add("todo", "just-created");
+  list.addEventListener("click", (e) => {e.currentTarget.remove();});
+  return list;
+}
+</script>
