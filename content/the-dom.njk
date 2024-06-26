@@ -41,6 +41,60 @@ title: The DOM
   
 </div>
 
+<div class="container-fluid m-0 p-5 bg-body-secondary text-info text-center">
+  <h2 class="mb-3">Animal Filters</h2>
+  <form id="filters" class="row p-0 m-0 mb-3">
+    <div class="d-flex flex-row mb-3 text-center">
+      <span class="me-3" style="margin-left: auto;">Type: </span>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="dolphin" value="dolphin">
+        <label class="form-check-label" for="dolphin">Dolphin</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="frog" value="frog">
+        <label class="form-check-label" for="frog">Frog</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="panda" value="panda">
+        <label class="form-check-label" for="panda">Panda</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="snake" value="snake">
+        <label class="form-check-label" for="snake">Snake</label>
+      </div>
+      <div class="form-check form-check-inline" style="margin-right: auto;">
+        <input class="form-check-input" type="radio" name="animalType" id="all" value="all" checked>
+        <label class="form-check-label" for="all">Show All</label>
+      </div>
+    </div>
+    <div class="d-flex flex-row text-center">
+      <label class="me-3 align-self-center" for="search" style="margin-left: auto;">Search: </label>
+      <input class="form-control" type="search" name="search" id="search" style="margin-right: auto; width: 350px;">
+    </div>
+  </form>
+
+  <div class="m-0 mb-3 p-0" id="summary"></div>
+
+  <div id="results">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/64219/dolphin-marine-mammals-water-sea-64219.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Cute Dolphine Underwater " animal="dolphin">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/34426/snake-rainbow-boa-reptile-scale.jpg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Person Holding Red and Black Snake" animal="snake">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/225869/pexels-photo-225869.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Adorable Dolphins on Surface of Water" animal="dolphin">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/45863/frog-butterfly-pond-mirroring-45863.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Macro Photography of Green Frog" animal="frog">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/4741848/pexels-photo-4741848.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Cute Panda Lying on Tree Logs&nbsp;" animal="panda">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/70083/frog-macro-amphibian-green-70083.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Green Frog" animal="frog">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/76957/tree-frog-frog-red-eyed-amphibian-76957.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Green Blue Yellow and Orange Frog on Green Leaf" animal="frog">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/106690/pexels-photo-106690.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Brown Snake" animal="snake">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/35669/hyla-meridionalis-the-frog-amphibians.jpg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Shallow Focus Photography of Green Frog" animal="frog">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/7506265/pexels-photo-7506265.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Panda bear eating bamboo leaves in zoo" animal="panda">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/6939448/pexels-photo-6939448.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="A Panda Eating Bamboo in the Zoo" animal="panda">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/162079/dolphin-sea-marine-mammals-wise-162079.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Dolphin's Head in the Surface" animal="dolphin">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/8162930/pexels-photo-8162930.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Panda Sitting on Top of a Wood" animal="panda">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/80474/grass-snake-snake-serpentes-natrix-80474.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="White and Black Snake on Close Up Photography" animal="snake">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/1986374/pexels-photo-1986374.jpeg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Gray Dolphin on Body of Water" animal="dolphin">
+    <img class="imageFilter" loading="lazy" src="https://images.pexels.com/photos/23817/pexels-photo.jpg?auto=compress&amp;cs=tinysrgb&amp;h=350" alt="Grey and Brown Snake Opening Mouth" animal="snake">
+  </div>
+</div>
+
 <style>
 /* The unordered list containing the todos */
 #todo-pane {
@@ -63,6 +117,15 @@ title: The DOM
 .just-created {
   box-shadow: 0 0 20px 1px #d99531;
 }
+
+/* Image gallery style */
+.hidden {
+  display: none;
+}
+
+img {
+  padding: 5px 3px;
+}
 </style>
 
 <script>
@@ -72,13 +135,13 @@ const priorityImages = {
   high: 'text-danger',
 };
 
-const form = document.forms.todo;
+const todo = document.forms.todo;
 const todoPane = document.getElementById("todo-pane");
 const titleInput = document.getElementById("title");
 const prioritySelect = document.getElementById("priority");
 const allTodos = document.querySelectorAll(".todo");
 
-form.addEventListener("submit", function (event) {
+todo.addEventListener("submit", function (event) {
   event.preventDefault();
   const newTodo = titleInput.value;
   console.log(newTodo);
@@ -101,4 +164,38 @@ function createTodo(title) {
   list.addEventListener("click", (e) => {e.currentTarget.remove();});
   return list;
 }
+
+const animalRadios = document.getElementsByName("animalType");
+const images = document.getElementsByClassName("imageFilter");
+const searchBox = document.getElementById("search");
+const form = document.getElementById("filters");
+const summary = document.getElementById("summary");
+
+function filterAnimals(e) {
+  const type = document.querySelector('input[name="animalType"]:checked').value;
+  const search = document.querySelector('input[name="search"]').value;
+  const text = document.createTextNode((search != "") ? `Showing animals that match the search "${search}" and the filter "${type}"` : `Showing animals that match the filter "${type}"`);
+  const para = document.createElement("p");
+  para.appendChild(text);
+  if (summary.children.length > 0) {
+    summary.removeChild(summary.firstChild);
+  }
+  summary.appendChild(para);
+  for (const image of images) {
+    // console.log(image.attributes.alt.value);
+    if ((type === "all" || type === image.attributes.animal.value) && image.attributes.alt.value.toLowerCase().includes(search.toLowerCase())) {
+      image.classList.remove("hidden");
+    } else {
+      image.classList.add("hidden");
+    }
+  }
+}
+
+for (i=0; i<animalRadios.length; i++) {
+  animalRadios[i].addEventListener("change", filterAnimals);
+}
+
+searchBox.addEventListener("input", filterAnimals);
+form.addEventListener("submit", (e) => {e.preventDefault();});
+
 </script>
