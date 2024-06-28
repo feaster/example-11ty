@@ -41,6 +41,60 @@ title: The DOM
   
 </div>
 
+<div class="container-fluid m-0 py-5 px-3 px-sm-5 bg-body-secondary text-info text-center">
+  <h2 class="mb-3">Animal Filters</h2>
+  <form id="filters" class="row p-0 m-0 mb-3">
+    <div class="mb-3 text-center" style="max-width: 100vw;">
+      <span class="me-3" style="margin-left: auto;">Type: </span>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="sea bird" value="sea bird">
+        <label class="form-check-label" for="sea bird">Sea Birds</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="duck" value="duck">
+        <label class="form-check-label" for="duck">Ducks</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="mammal" value="mammal">
+        <label class="form-check-label" for="mammal">Mammals</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="animalType" id="butterfly or moth" value="butterfly or moth">
+        <label class="form-check-label" for="butterfly or moth">Butterflies & Moths</label>
+      </div>
+      <div class="form-check form-check-inline" style="margin-right: auto;">
+        <input class="form-check-input" type="radio" name="animalType" id="all" value="all" checked>
+        <label class="form-check-label" for="all">Show All</label>
+      </div>
+    </div>
+    <div class="d-flex flex-row text-center">
+      <label class="me-3 align-self-center" for="search" style="margin-left: auto;">Search: </label>
+      <input class="form-control" type="search" name="search" id="search" style="margin-right: auto; width: 350px;">
+    </div>
+  </form>
+
+  <div class="m-0 mb-3 p-0" id="summary"></div>
+
+  <div id="results" class="m-0 p-0">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1108207(edit).webp" alt="Male mallard standing in shallow water" animal="duck">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1107239(edit).webp" alt="Puffin in flight" animal="sea bird">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1108021(edit)(2).webp" alt="Roe deer in standing in long grass" animal="mammal">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1107307(edit).webp" alt="Gannet collecting grass for nesting" animal="sea bird">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1049980(edit).webp" alt="Dark green fritillary on a pink clover" animal="butterfly or moth">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1048338(edit).webp" alt="Goosander juveniles swimming" animal="duck">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1120224(edit).webp" alt="Eider duck flapping wings on the sea" animal="duck">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1011310(edit).webp" alt="Hedgehog under bushes" animal="mammal">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1121949.webp" alt="Hummingbird hawkmoth hovering next to a buddleia" animal="butterfly or moth">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1047687(edit).webp" alt="Female mandarin duck with reflection" animal="duck">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1097022(edit).webp" alt="Razorbill trying to land in strong winds" animal="sea bird">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1061433(edit).webp" alt="Stoat staing in an alpine meadow" animal="mammal">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1143202.webp" alt="Marmot lying in the sun" animal="mammal">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1132150.webp" alt="Adonis blue butterfly" animal="butterfly or moth">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1095791(edit).webp" alt="Bar-tailed godwit in the sea at Whitby" animal="sea bird">
+    <img class="imageFilter" loading="lazy" src="/img/animal_filters/P1132382.webp" alt="Swollowtail butterfly on a buddleia" animal="butterfly or moth">
+  </div>
+</div>
+
 <style>
 /* The unordered list containing the todos */
 #todo-pane {
@@ -63,6 +117,16 @@ title: The DOM
 .just-created {
   box-shadow: 0 0 20px 1px #d99531;
 }
+
+/* Image gallery style */
+.hidden {
+  display: none;
+}
+
+img {
+  padding: 5px 3px;
+  max-width: 90vw;
+}
 </style>
 
 <script>
@@ -72,13 +136,13 @@ const priorityImages = {
   high: 'text-danger',
 };
 
-const form = document.forms.todo;
+const todo = document.forms.todo;
 const todoPane = document.getElementById("todo-pane");
 const titleInput = document.getElementById("title");
 const prioritySelect = document.getElementById("priority");
 const allTodos = document.querySelectorAll(".todo");
 
-form.addEventListener("submit", function (event) {
+todo.addEventListener("submit", function (event) {
   event.preventDefault();
   const newTodo = titleInput.value;
   console.log(newTodo);
@@ -101,4 +165,42 @@ function createTodo(title) {
   list.addEventListener("click", (e) => {e.currentTarget.remove();});
   return list;
 }
+
+const animalRadios = document.getElementsByName("animalType");
+const images = document.getElementsByClassName("imageFilter");
+const searchBox = document.getElementById("search");
+const form = document.getElementById("filters");
+const summary = document.getElementById("summary");
+
+for (i=0; i<images.length; i++){
+  images[i].setAttribute("title", `${images[i].alt}`);
+};
+
+function filterAnimals(e) {
+  const type = document.querySelector('input[name="animalType"]:checked').value;
+  const search = document.querySelector('input[name="search"]').value;
+  const text = document.createTextNode((search != "") ? `Showing animals that match the search "${search}" and the filter "${type}"` : `Showing animals that match the filter "${type}"`);
+  const para = document.createElement("p");
+  para.appendChild(text);
+  if (summary.children.length > 0) {
+    summary.removeChild(summary.firstChild);
+  }
+  summary.appendChild(para);
+  for (const image of images) {
+    // console.log(image.attributes.alt.value);
+    if ((type === "all" || type === image.attributes.animal.value) && image.attributes.alt.value.toLowerCase().includes(search.toLowerCase())) {
+      image.classList.remove("hidden");
+    } else {
+      image.classList.add("hidden");
+    }
+  }
+}
+
+for (i=0; i<animalRadios.length; i++) {
+  animalRadios[i].addEventListener("change", filterAnimals);
+}
+
+searchBox.addEventListener("input", filterAnimals);
+form.addEventListener("submit", (e) => {e.preventDefault();});
+
 </script>
