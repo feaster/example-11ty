@@ -172,6 +172,10 @@ const searchBox = document.getElementById("search");
 const form = document.getElementById("filters");
 const summary = document.getElementById("summary");
 
+for (i=0; i<images.length; i++){
+  images[i].setAttribute("title", `${images[i].alt}`);
+};
+
 function filterAnimals(e) {
   const type = document.querySelector('input[name="animalType"]:checked').value;
   const search = document.querySelector('input[name="search"]').value;
